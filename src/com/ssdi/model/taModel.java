@@ -20,7 +20,6 @@ public class taModel {
     	String regionName, rDescription;
     	String attractionName, aDescription;
     	String locationName;
-    	taBean loc = new taBean();
     	
     	locationName = location;
     	
@@ -38,12 +37,14 @@ public class taModel {
 				System.out.println(locationID +""+ locationType);
 	  		}
 			if(locationType.equals("country")){
+				
 				System.out.println("qwerty");
 				Query = "select * from region where location_ID = \""+ locationID +"\";";
 				System.out.println(Query);
 				rs = stmt.executeQuery(Query);
 				while(rs.next())
 				{
+					taBean loc = new taBean();
 					regionName = rs.getString("region_name");
 					rDescription = rs.getString("description");
 					System.out.println(regionName);
@@ -53,23 +54,32 @@ public class taModel {
 		  		}
 			}
 			if(locationType.equals("region")){
+				
 				System.out.println("qwerty");
 				Query = "select * from attractions where location_ID = \""+ locationID +"\";";
 				System.out.println(Query);
 				rs = stmt.executeQuery(Query);
 				while(rs.next())
 				{
-					System.out.println("yewt");
+					taBean loc = new taBean();
 					attractionName = rs.getString("attraction_name");
 					aDescription = rs.getString("description");
-					System.out.println(attractionName);
+					
 					loc.setAttractionName(attractionName);
 					loc.setDescription(aDescription);
 					taList.add(loc);
+					//System.out.println(loc.getAttractionName());
 		  		}
 			}
     	} catch (Exception e){
     		e.printStackTrace();
+    	}
+    	
+    	for (int i = 0; i < taList.size(); i++) {
+            //System.out.println(i+" "+taList.get(i));
+            System.out.println(taList.get(i).getAttractionName());
+            System.out.println(taList.get(i).getDescription());
+            
     	}
 		return taList;
 	}

@@ -36,13 +36,17 @@
                 <li><a href="#contact">Hotels</a></li>
                 <li><a href="#contact">Contact us</a></li>  
               </ul>
-               <ul class="nav navbar-nav navbar-right">
-                 <li >Welcome, ${requestScope.username}</li>
-                <li><a href="#">             </a></li>
-                 </ul>
+              <ul class="nav navbar-nav navbar-right">
+                 <li > <a href="#">Welcome, ${requestScope.username}</li>
+                <li><a href="#">                  </a></li>
+              </ul>
             </div>
+            
+          
           </div>
         </nav>
+        
+        <p>  <h3> Registration Successful. </h3> </p>
 
       </div>
     </div>

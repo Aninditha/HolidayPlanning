@@ -48,6 +48,7 @@ public class TASearch extends HttpServlet {
 		    String givenLocation = location.getLocation();
 		    taList = taModel.search(givenLocation);
 		    System.out.println("size in controller: "+taList.size());
+		    System.out.println(taList);
 		} catch(Exception e){
 			e.printStackTrace();
 		}

@@ -29,7 +29,7 @@
 	href="css/bootstrap-theme.min.css">
 
 
-<script >
+<script>
 
 
 $("#myTable").tablesorter(); 
@@ -57,6 +57,10 @@ $(document).ready(function() {
                 sorter: false 
             },
             5: { 
+                // disable it by setting the property sorter to false 
+                sorter: false 
+            },
+            6: { 
                 // disable it by setting the property sorter to false 
                 sorter: false 
             }
@@ -100,14 +104,11 @@ $(document).ready(function() {
 						<td><c:out value="${item.airlines}" /></td>
 						<td><c:out value="${item.source}" /></td>
 						<td><c:out value="${item.destination}" /></td>
-						<td></td>
-<%-- 						<td><c:out value="${item.DateOfDeparture}" /></td> --%>
+						<td><c:out value="${item.dateOfDeparture}" /></td>
 						<td><c:out value="${item.departureTime}" /></td>
-						<td> </td>
-<%-- 						<td><c:out value="${item.DateOfArrival}" /></td> --%>
+						<td><c:out value="${item.dateOfArrival}" /></td>
 						<td><c:out value="${item.arrivalTime}" /></td>
-<%-- 					<td><c:out value="${item.Price}" /></td>  --%>
-						<td> </td>
+						<td><c:out value="${item.price}" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -88,7 +88,7 @@ $(document).ready(function() {
      <tr >
       
       <td><c:out value="${item.attractionName}" /></td> 
-<%--   	  <td><c:out value="${item.Description}" /></td>  --%>
+  	  <td><c:out value="${item.description}" /></td> 
   	  
   	  </tr>
    </c:forEach>
