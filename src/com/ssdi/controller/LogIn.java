@@ -1,13 +1,13 @@
 package com.ssdi.controller;
 
 import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import com.ssdi.POJO.userbean;
 import com.ssdi.model.LoginModel;
 
@@ -42,8 +42,9 @@ public class LogIn extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		userbean User = new userbean();
 		try{
-			userbean User = new userbean();
 		    User.setUsername(request.getParameter("username"));
 		    User.setPassword(request.getParameter("password"));
 		    username = User.getUsername();
@@ -53,7 +54,9 @@ public class LogIn extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(Exist){
-			request.setAttribute("username", username);
+			HttpSession Session = request.getSession();
+			Session.setAttribute("username", User.getUsername());
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/home_user.jsp");
 			rd.forward(request,response);
 		}

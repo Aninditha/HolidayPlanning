@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -30,42 +28,41 @@
 
 
 <script>
+	$("#myTable").tablesorter();
 
-
-$("#myTable").tablesorter(); 
-
-$(document).ready(function() { 
-    $("table").tablesorter({ 
-        // pass the headers argument and assing a object 
-        headers: { 
-            // assign the secound column (we start counting zero) 
-            0: { 
-                // disable it by setting the property sorter to false 
-                sorter: false 
-            }, 
-            // assign the third column (we start counting zero) 
-            1: { 
-                // disable it by setting the property sorter to false 
-                sorter: false 
-            },
-            4: { 
-                // disable it by setting the property sorter to false 
-                sorter: false 
-            },
-            5: { 
-                // disable it by setting the property sorter to false 
-                sorter: false 
-            }
-        } 
-    }); 
-});
-
- 
-
+	$(document).ready(function() {
+		$("table").tablesorter({
+			// pass the headers argument and assing a object 
+			headers : {
+				// assign the secound column (we start counting zero) 
+				0 : {
+					// disable it by setting the property sorter to false 
+					sorter : false
+				},
+				// assign the third column (we start counting zero) 
+				1 : {
+					// disable it by setting the property sorter to false 
+					sorter : false
+				},
+				4 : {
+					// disable it by setting the property sorter to false 
+					sorter : false
+				},
+				5 : {
+					// disable it by setting the property sorter to false 
+					sorter : false
+				}
+			}
+		});
+	});
 </script>
 
-<script src="jquery.tablesorter.js"> </script>
-<script> $('myTable').tablesorter(); </script>
+<script src="jquery.tablesorter.js">
+	
+</script>
+<script>
+	$('myTable').tablesorter();
+</script>
 
 <link href="css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="css/center-block.css">
@@ -88,11 +85,13 @@ $(document).ready(function() {
 			</thead>
 			<tbody>
 				<c:forEach items="${requestScope.taList}" var="item">
-					<form action="TARegionSearch?regionName=${item.regionName}" method = "POST">
+					<form action="TARegionSearch?regionName=${item.regionName}"
+						method="POST">
 						<tr>
 							<td><c:out value="${item.regionName}" /></td>
 							<td><c:out value="${item.description}" /></td>
-							<td><button type="submit" class="btn btn-default">view>></button> </td>
+							<td><button type="submit" class="btn btn-default">view>></button>
+							</td>
 						</tr>
 					</form>
 				</c:forEach>

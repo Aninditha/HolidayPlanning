@@ -56,7 +56,14 @@ public class TASearch extends HttpServlet {
 		request.setAttribute("taList",taList);
 		for(int i=0; i<taList.size(); i++)
 			System.out.println(taList.get(i).getRegionName());
-		RequestDispatcher rd = request.getRequestDispatcher("/taSearchList.jsp");
-		rd.forward(request,response);	
+
+		if (request.getSession().getAttribute("username") != null){
+			RequestDispatcher rd = request.getRequestDispatcher("/taSearchList_user.jsp");
+			rd.forward(request,response);
+		}
+		else{
+			RequestDispatcher rd = request.getRequestDispatcher("/taSearchList.jsp");
+			rd.forward(request,response);
+		}
 	}
 }

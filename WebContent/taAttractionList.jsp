@@ -1,5 +1,3 @@
-
-    
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -15,12 +13,13 @@
 
 <title>Holiday Planning</title>
 
-<%@include file="Header.jsp" %>
+<%@include file="Header.jsp"%>
 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
-    <script type="text/javascript" src="jquery-1.12.2.min.js"></script>
-   
-<script type="text/javascript" src="jquery.tablesorter.js"></script> 
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+<script type="text/javascript" src="jquery-1.12.2.min.js"></script>
+
+<script type="text/javascript" src="jquery.tablesorter.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
@@ -28,7 +27,7 @@
 	href="css/bootstrap-theme.min.css">
 
 
-<script >
+<script>
 
 
 $("#myTable").tablesorter(); 
@@ -72,29 +71,30 @@ $(document).ready(function() {
 </head>
 
 <body>
-<div class="container">
+	<div class="container">
 
 
- <table class="tablesorter table table-bordered table-striped"  class="sortable" id="myTable"> 
+		<table class="tablesorter table table-bordered table-striped"
+			class="sortable" id="myTable">
 
-<thead> 
-      <tr>
-        <th class="header">  Attractions </th>
-        <th>Description</th>
-      </tr>
-       </thead>
-<tbody>
-  <c:forEach items="${requestScope.taList}" var="item"> 	
-     <tr >
-      
-      <td><c:out value="${item.attractionName}" /></td> 
-  	  <td><c:out value="${item.description}" /></td> 
-  	  
-  	  </tr>
-   </c:forEach>
-   </tbody>
-</table>
-</div>
+			<thead>
+				<tr>
+					<th class="header">Attractions</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${requestScope.taList}" var="item">
+					<tr>
+
+						<td><c:out value="${item.attractionName}" /></td>
+						<td><c:out value="${item.description}" /></td>
+
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 
 </body>
 </html>

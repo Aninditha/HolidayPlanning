@@ -52,8 +52,13 @@ public class TARegionSearch extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("taList",taList);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/taAttractionList.jsp");
-		rd.forward(request,response);
+		if (request.getSession().getAttribute("username") != null){
+			RequestDispatcher rd = request.getRequestDispatcher("/taAttractionList_user.jsp");
+			rd.forward(request,response);
+		}
+		else{
+			RequestDispatcher rd = request.getRequestDispatcher("/taAttractionList.jsp");
+			rd.forward(request,response);
+		}
 	}
 }

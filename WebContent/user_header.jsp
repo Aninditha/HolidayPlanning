@@ -30,17 +30,17 @@
 								class="icon-bar"></span> <span class="icon-bar"></span> <span
 								class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="home.html">Holiday Planning</a>
+						<a class="navbar-brand" href="home_user.jsp">Holiday Planning</a>
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
-							<li><a href="#">Attractions</a></li>
+							<li><a href="ta_user.jsp">Attractions</a></li>
 							<li><a href="#about">Flights</a></li>
 							<li><a href="#contact">Hotels</a></li>
 							<li><a href="#contact">Contact us</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							<li><a>Welcome, ${requestScope.username}</a></li>
+							<li><a>Welcome, ${sessionScope.username}</a></li>
 							<li><a href="home.jsp"> Log Out</a></li>
 							<li><a href="#"> </a></li>
 						</ul>
