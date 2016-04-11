@@ -41,7 +41,7 @@ body {
 
 
 <body>
-	<%@include file="Header.jsp"%>
+	<%@include file="user_header.jsp"%>
 	<!-- Include Bootstrap Datepicker -->
 	<link rel="stylesheet"
 		href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
@@ -68,29 +68,32 @@ body {
 			<h3>Search for flights</h3>
 			<p>Enter the details</p>
 
+
 			<FORM NAME="radioLinks">
-				<INPUT TYPE="radio" NAME="pickme" id="OneWay"
-					onClick="document.location='http://localhost:8080/HolidayPlanning/FlightOneWay.jsp';" />
-				One Way <INPUT TYPE="radio" NAME="pickme" id="RoundTrip" checked=""
-					onClick="document.location='http://localhost:8080/HolidayPlanning/FlightSearch.jsp';" />
+				<INPUT TYPE="radio" NAME="pickme" id="OneWay" checked=""
+					onClick="document.location='http://localhost:8080/HolidayPlanning/FlightOneWay_user.jsp';" />
+				One Way <INPUT TYPE="radio" NAME="pickme" id="RoundTrip"
+					onClick="document.location='http://localhost:8080/HolidayPlanning/FlightSearch_user.jsp';" />
 				Round Trip
 
 			</FORM>
 
 			<form id="dateRangeForm" action="FlightSearch" method="POST"
 				class="form-horizontal">
+
+
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="usr">Source:</label>
 					<div class="col-sm-6">
-						<input required type="text" class="form-control" id="usr"
-							name="source" placeholder="Enter source">
+						<input type="text" class="form-control" id="usr" name="source"
+							placeholder="Enter source">
 					</div>
 				</div>
 				<div class="form-group">
 
 					<label class="control-label col-sm-3" for="usr">Destination:</label>
 					<div class="col-sm-6">
-						<input type="text" required class="form-control" id="usr"
+						<input type="text" class="form-control" id="usr"
 							name="destination" placeholder="Enter destination">
 					</div>
 
@@ -99,8 +102,8 @@ body {
 					<label class="control-label col-sm-3">Start Date</label>
 					<div class="col-sm-6">
 						<div class="input-group input-append date" id="dateRangePicker">
-							<input required type="text" class="form-control" name="startDate" />
-							<span class="input-group-addon add-on"><span
+							<input type="text" class="form-control" name="startDate" /> <span
+								class="input-group-addon add-on"><span
 								class="glyphicon glyphicon-calendar"></span></span>
 						</div>
 					</div>
@@ -110,7 +113,7 @@ body {
 					<label class="control-label col-sm-3">End Date</label>
 					<div class="col-sm-6">
 						<div class="input-group input-append date" id="dateRangePicker1">
-							<input required type="text" class="form-control" name="endDate" />
+							<input type="text" class="form-control" name="endDate" / disabled>
 							<span class="input-group-addon add-on"><span
 								class="glyphicon glyphicon-calendar"></span></span>
 						</div>
@@ -231,10 +234,11 @@ body {
 					<label class="control-label col-sm-3" for="usr">Capacity:</label>
 					<div class="col-sm-6">
 						<input type="number" class="form-control" id="usr" required
-							name="source" placeholder="Enter number of people travelling"
+							name="capacity" placeholder="Enter number of people travelling"
 							min="1" / max="10" />
 					</div>
 				</div>
+
 				<div class="form-group">
 					<div class="col-xs-6 col-xs-offset-3">
 						<button type="submit" class="btn btn-default">Search</button>
@@ -248,10 +252,9 @@ body {
 		<!-- end well-->
 	</section>
 	<!-- Call to action -->
-	<br>
-	<br>
-	<br>
-	<br>
+
 	<%@include file="footer.jsp"%>
+
+
 </body>
 </html>

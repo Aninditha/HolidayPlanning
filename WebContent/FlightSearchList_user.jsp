@@ -13,8 +13,6 @@
 
 <title>Holiday Planning</title>
 
-<%@include file="Header.jsp"%>
-
 <script
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
 <script type="text/javascript" src="jquery-1.12.2.min.js"></script>
@@ -86,6 +84,7 @@ $(document).ready(function() {
 
 </head>
 <body>
+	<%@include file="user_header.jsp"%>
 	<div class="container">
 
 			<h2 style="text-align: center">List of Flights</h2>

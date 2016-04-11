@@ -47,15 +47,11 @@ public class TASearch extends HttpServlet {
 		    location.setLocation(request.getParameter("country"));
 		    String country = location.getLocation();
 		    taList = taModel.searchRegions(country);
-		    System.out.println("size in controller: "+taList.size());
-		    System.out.println(taList);
 		} catch(Exception e){
 			e.printStackTrace();
 		}
 		
 		request.setAttribute("taList",taList);
-		for(int i=0; i<taList.size(); i++)
-			System.out.println(taList.get(i).getRegionName());
 
 		if (request.getSession().getAttribute("username") != null){
 			RequestDispatcher rd = request.getRequestDispatcher("/taSearchList_user.jsp");

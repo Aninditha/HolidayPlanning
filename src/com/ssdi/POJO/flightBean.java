@@ -9,12 +9,16 @@ public class flightBean {
 	private String destination;
 	private String airlines;
 	private String startDate;
+	
 	private String endDate;
-	private double Price = 0;
+	private String FlightID;
+	private String Price;
 	private int vacancies = 0, Stops;
-	private Time departureTime;
-	private Time arrivalTime, TravelTime, WaitTime;
-	private Date DateOfDeparture, DateOfArrival;
+	private String departureTime;
+	private String arrivalTime;
+	private Time TravelTime, WaitTime;
+	private String DateOfDeparture;
+	private String DateOfArrival;
 	
 	public String getSource() {
 		return source;
@@ -46,11 +50,11 @@ public class flightBean {
 	public void setAirlines(String airlines) {
 		this.airlines = airlines;
 	}
-	public double getPrice() {
+	public String getPrice() {
 		return Price;
 	}
-	public void setPrice(double price) {
-		Price = price;
+	public void setPrice(String string) {
+		Price = string;
 	}
 	public int getVacancies() {
 		return vacancies;
@@ -64,16 +68,16 @@ public class flightBean {
 	public void setStops(int stops) {
 		Stops = stops;
 	}
-	public Time getDepartureTime() {
+	public String getDepartureTime() {
 		return departureTime;
 	}
-	public void setDepartureTime(Time departureTime) {
-		this.departureTime = departureTime;
+	public void setDepartureTime(String string) {
+		this.departureTime = string;
 	}
-	public Time getArrivalTime() {
+	public String getArrivalTime() {
 		return arrivalTime;
 	}
-	public void setArrivalTime(Time arrivalTime) {
+	public void setArrivalTime(String arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 	public Time getTravelTime() {
@@ -91,13 +95,20 @@ public class flightBean {
 	public String getDateOfDeparture() {
 		return DateOfDeparture.toString();
 	}
-	public void setDateOfDeparture(Date dateOfDeparture) {
-		DateOfDeparture = dateOfDeparture;
+	public void setDateOfDeparture(String string) {
+		DateOfDeparture = string;
 	}
-	public Date getDateOfArrival() {
+	public String getDateOfArrival() {
 		return DateOfArrival;
 	}
-	public void setDateOfArrival(Date dateOfArrival) {
+	public void setDateOfArrival(String dateOfArrival) {
 		DateOfArrival = dateOfArrival;
+	}
+	
+	public void setFlightID(String flightID) {
+		FlightID = flightID;
+	}
+	public String getFlightID() {
+		return FlightID;
 	}
 }

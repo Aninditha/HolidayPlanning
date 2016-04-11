@@ -35,7 +35,7 @@
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
 							<li><a href="ta_user.jsp">Attractions</a></li>
-							<li><a href="#about">Flights</a></li>
+							<li><a href="FlightSearch_user.jsp">Flights</a></li>
 							<li><a href="#contact">Hotels</a></li>
 							<li><a href="#contact">Contact us</a></li>
 						</ul>

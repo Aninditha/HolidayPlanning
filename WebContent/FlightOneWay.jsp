@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,9 +71,9 @@ body {
 
 			<FORM NAME="radioLinks">
 				<INPUT TYPE="radio" NAME="pickme" id="OneWay" checked=""
-					onClick="document.location='http://localhost:8080/HolidayPlanningRegister/FlightOneWay.jsp';" />
+					onClick="document.location='http://localhost:8080/HolidayPlanning/FlightOneWay.jsp';" />
 				One Way <INPUT TYPE="radio" NAME="pickme" id="RoundTrip"
-					onClick="document.location='http://localhost:8080/HolidayPlanningRegister/FlightSearch.jsp';" />
+					onClick="document.location='http://localhost:8080/HolidayPlanning/FlightSearch.jsp';" />
 				Round Trip
 
 			</FORM>
@@ -212,7 +210,7 @@ $(document).ready(function() {
 					<label class="control-label col-sm-3" for="usr">Capacity:</label>
 					<div class="col-sm-6">
 						<input type="number" class="form-control" id="usr" required
-							name="source" placeholder="Enter number of people travelling"
+							name="capacity" placeholder="Enter number of people travelling"
 							min="1" / max="10" />
 					</div>
 				</div>

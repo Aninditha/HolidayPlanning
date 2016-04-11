@@ -1,85 +1,65 @@
 package com.ssdi.model;
 
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.Time;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import com.ssdi.api.ConnectFlightAPI;
 import com.ssdi.POJO.flightBean;
 
 public class FlightModel {
-	
-	static Connection currentCon = null;
-    static ArrayList<flightBean> flight = new ArrayList<flightBean>();
-	
-	public static ArrayList<flightBean> search(String givenSource, String givenDestination, String startDate, String endDate) {
-		
-		Statement stmt = null;
-    	ResultSet rs = null;
 
-    	double Price = 0;
-    	int vacancies = 0, Stops;
-    	String airlines, source, destination;
-    	Time departureTime;
-		Time arrivalTime, TravelTime, WaitTime;
-    	Date DateOfDeparture, DateOfArrival;
-		String StartDate;
-    	flightBean bean = new flightBean();
-    	source = bean.getSource();
-    	
-    	String flightSearch = "select * from flight where Source = \""+ givenSource +"\" and"
-    			+ " Destination = \""+ givenDestination +"\" and DateOfDeparture = \'" + startDate+ "\';";
-    	System.out.println(flightSearch);
-    	try{
-    		//connect to DB
-	  		currentCon = DBConnection.getConnection();
-	  		
-	  		stmt = currentCon.createStatement();
-	  		
-	  		rs = stmt.executeQuery(flightSearch);
-	  		while (rs.next()) {
-	  			System.out.println("qwerty");
-		    	flightBean flightData = new flightBean();
-		    	
-		    	airlines = rs.getString("AirlineName");
-		    	Price = rs.getInt("Price");
-		    	vacancies = rs.getInt("NumberOfVacantSeats");
-		    	departureTime = rs.getTime("DepartureTime");
-		    	arrivalTime = rs.getTime("ArrivalTime");
-		    	source = rs.getString("Source");
-		    	destination = rs.getString("Destination");
-		    	DateOfDeparture = rs.getDate("DateOfDeparture");
-		    	DateOfArrival = rs.getDate("DateOfArrival");
-		    	TravelTime = rs.getTime("TravelTime");
-		    	WaitTime = rs.getTime("WaitTime");
-		    	Stops = rs.getInt("Stops");
-		    	
-		    	flightData.setSource(source);
-		    	flightData.setDestination(destination);
-		    	flightData.setPrice(Price);
-		    	flightData.setVacancies(vacancies);
-		    	flightData.setStops(Stops);
-		    	flightData.setAirlines(airlines);
-		    	flightData.setDepartureTime(departureTime);
-		    	flightData.setArrivalTime(arrivalTime);
-		    	flightData.setTravelTime(TravelTime);
-		    	flightData.setWaitTime(WaitTime);
-		    	flightData.setDateOfDeparture(DateOfDeparture);
-		    	flightData.setDateOfArrival(DateOfArrival);
-		    	
-		    	System.out.println("" + DateOfDeparture + departureTime);
-		    	flight.add(flightData);
-	  		}
-    	} catch(Exception e) {
-    		e.printStackTrace();
-    	} finally{
-			System.out.println(flight.size());
-			for (int i = 0; i < flight.size(); i++) {
-	            System.out.println(i+" "+flight.get(i));
-	            System.out.println(flight.get(i).getSource());
-	        }
+	static Connection currentCon = null;
+
+	public static List<flightBean> call_Flight_model(String source, String destination, String startDate,
+			String endDate, int capacity) {
+
+		Map<String, ArrayList<String>> hm = ConnectFlightAPI.flightAPI(source, destination, startDate, endDate, capacity);
+		
+		for (Entry<String, ArrayList<String>> entry : hm.entrySet()) {
+			System.out.println("Inside model flight");
+			System.out.println("key:" + entry.getKey() + "Value of array list = " + entry.getValue());
+		
 		}
-    	return flight;
+
+		ArrayList<flightBean> flight = new ArrayList<flightBean>();
+
+		flightBean flightData;
+
+		for (Entry<String, ArrayList<String>> entry : hm.entrySet()) {
+
+			flightData = new flightBean();
+			
+			List<String> list = new ArrayList<String>();
+
+			list = entry.getValue();
+			
+			
+			
+			flightData.setFlightID(entry.getKey());
+			flightData.setSource(list.get(0));
+			flightData.setDestination(list.get(1));
+
+			flightData.setDepartureTime(list.get(2));
+
+			flightData.setArrivalTime(list.get(3));
+			flightData.setPrice(list.get(4));
+			flightData.setDateOfDeparture(list.get(5));
+			flightData.setDateOfArrival(list.get(6));
+			
+			
+
+			/*
+			 * flightData.setVacancies(vacancies); flightData.setStops(Stops);
+			 * flightData.setAirlines(airlines);
+			 */
+
+			flight.add(flightData);
+		}
+
+		return flight;
+
 	}
 }

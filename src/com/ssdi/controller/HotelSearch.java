@@ -53,9 +53,13 @@ public class HotelSearch extends HttpServlet {
 		}
 		
 		request.setAttribute("hotelList",hotelList);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/HotelSearchList.jsp");
-		rd.forward(request,response);
-		
+		if (request.getSession().getAttribute("username") != null){
+			RequestDispatcher rd = request.getRequestDispatcher("/HotelSearchList_user.jsp");
+			rd.forward(request,response);
+		}
+		else{
+			RequestDispatcher rd = request.getRequestDispatcher("/HotelSearchList.jsp");
+			rd.forward(request,response);
+		}
 	}
 }

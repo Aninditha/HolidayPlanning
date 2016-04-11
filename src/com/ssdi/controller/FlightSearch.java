@@ -27,45 +27,47 @@ public class FlightSearch extends HttpServlet {
      */
     public FlightSearch() {
         super();
-        // TODO Auto-generated constructor stub
+      
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+		
 		try{
-			flightBean flight = new flightBean();
+				    
+		    String source = request.getParameter("source");
+		    String destination = request.getParameter("destination");
+		    String startDate = request.getParameter("startDate");
+		    String endDate = request.getParameter("endDate");
+		    int capacity = Integer.parseInt(request.getParameter("capacity"));
 		    
-			flight.setSource(request.getParameter("source"));
-		    flight.setDestination(request.getParameter("destination"));
-		    flight.setStartDate(request.getParameter("startDate"));
-		    flight.setEndDate(request.getParameter("endDate"));
+		    flightList = FlightModel.call_Flight_model(source, destination, startDate, endDate, capacity);
 		    
-		    String source = flight.getSource();
-		    String destination = flight.getDestination();
-		    String startDate = flight.getStartDate();
-		    String endDate = flight.getEndDate();
-		    
-		    flightList = FlightModel.search(source, destination, startDate, endDate);
-		    System.out.println("size in controller: "+flightList.size());
 		} catch(Exception e){
 			e.printStackTrace();
 		}
 		
+		request.setAttribute("source",request.getParameter("source") );
+		request.setAttribute("destination",request.getParameter("destination") );
+		
 		request.setAttribute("flightList",flightList);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/FlightSearchList.jsp");
-		rd.forward(request,response);
-		
+		if (request.getSession().getAttribute("username") != null){
+			RequestDispatcher rd = request.getRequestDispatcher("/FlightSearchList_user.jsp");
+			rd.forward(request,response);
+		}
+		else{
+			RequestDispatcher rd = request.getRequestDispatcher("/FlightSearchList.jsp");
+			rd.forward(request,response);
+		}
 	}
 }

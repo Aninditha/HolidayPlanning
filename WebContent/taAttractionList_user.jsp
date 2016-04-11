@@ -13,7 +13,7 @@
 
 <title>Holiday Planning</title>
 
-<%@include file="Header.jsp"%>
+<%@include file="user_header.jsp"%>
 
 <script
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
@@ -35,18 +35,14 @@ $("#myTable").tablesorter();
 $(document).ready(function() { 
     $("table").tablesorter({ 
         // pass the headers argument and assing a object 
-       /*  headers: { 
+        headers: { 
             // assign the secound column (we start counting zero) 
-           // assign the third column (we start counting zero) 
+            0: { 
+                // disable it by setting the property sorter to false 
+                sorter: false 
+            }, 
+            // assign the third column (we start counting zero) 
             1: { 
-                // disable it by setting the property sorter to false 
-                sorter: false 
-            },
-            2: { 
-                // disable it by setting the property sorter to false 
-                sorter: false 
-            },
-            3: { 
                 // disable it by setting the property sorter to false 
                 sorter: false 
             },
@@ -57,12 +53,8 @@ $(document).ready(function() {
             5: { 
                 // disable it by setting the property sorter to false 
                 sorter: false 
-            },
-            6: { 
-                // disable it by setting the property sorter to false 
-                sorter: false 
             }
-        }  */
+        } 
     }); 
 });
 
@@ -76,57 +68,28 @@ $(document).ready(function() {
 <link href="css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="css/center-block.css">
 
-<style> 
-
- th {
-    background-color:  	#A9A9A9;
-    color: white;
-	}
-</style>
-
 </head>
+
 <body>
 	<div class="container">
 
-			<h2 style="text-align: center">List of Flights</h2>
-			<br>
-		
-		<div class="container" style="text-align: center" >  
-		<span class="label label-success" style="font-size: 30px; " >${requestScope.source}</span>
-		<img src="images/flight.png" width="40" height="30">
-		<img src="images/flight.png" width="40" height="30">
-		<img src="images/flight.png" width="40" height="30">
-		<img src="images/flight.png" width="40" height="30">
-		<span class="label label-success" style="font-size: 30px">${requestScope.destination}</span>
-		</div>
-		
-		<br> <br>
+
 		<table class="tablesorter table table-bordered table-striped"
 			class="sortable" id="myTable">
 
 			<thead>
 				<tr>
-					<th class="header">FlightID</th>
-<!-- 					<th>source</th>
-					<th>destination</th> -->
-					<th>DateOfDeparture</th>
-					<th>departureTime</th>
-					<th>DateOfArrival</th>
-					<th>arrivalTime</th>
-					<th>Price</th>
+					<th class="header">Attractions</th>
+					<th>Description</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${requestScope.flightList}" var="item">
+				<c:forEach items="${requestScope.taList}" var="item">
 					<tr>
-						 <td><c:out value="${item.flightID}" /></td> 
-						<%-- <td><c:out value="${item.source}" /></td>
-						<td><c:out value="${item.destination}" /></td> --%>
-						<td><c:out value="${item.dateOfDeparture}" /></td>
-						<td><c:out value="${item.departureTime}" /></td>
-						<td><c:out value="${item.dateOfArrival}" /></td>
-						<td><c:out value="${item.arrivalTime}" /></td>
-						<td><c:out value="${item.price}" /></td>
+
+						<td><c:out value="${item.attractionName}" /></td>
+						<td><c:out value="${item.description}" /></td>
+
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -41,7 +41,7 @@ body {
 
 
 <body>
-	<%@include file="Header.jsp"%>
+	<%@include file="user_header.jsp"%>
 	<!-- Include Bootstrap Datepicker -->
 	<link rel="stylesheet"
 		href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
@@ -70,9 +70,9 @@ body {
 
 			<FORM NAME="radioLinks">
 				<INPUT TYPE="radio" NAME="pickme" id="OneWay"
-					onClick="document.location='http://localhost:8080/HolidayPlanning/FlightOneWay.jsp';" />
+					onClick="document.location='http://localhost:8080/HolidayPlanning/FlightOneWay_user.jsp';" />
 				One Way <INPUT TYPE="radio" NAME="pickme" id="RoundTrip" checked=""
-					onClick="document.location='http://localhost:8080/HolidayPlanning/FlightSearch.jsp';" />
+					onClick="document.location='http://localhost:8080/HolidayPlanning/FlightSearch_user.jsp';" />
 				Round Trip
 
 			</FORM>
