@@ -37,7 +37,7 @@
 							<li><a href="ta.jsp">Attractions</a></li>
 							<li><a href="FlightSearch.jsp">Flights</a></li>
 							<li><a href="hotel.jsp">Hotels</a></li>
-							<li><a href="#contact">Contact us</a></li>
+							<li><a href="contact.jsp">Contact us</a></li>
 						</ul>
 					</div>
 				</div>

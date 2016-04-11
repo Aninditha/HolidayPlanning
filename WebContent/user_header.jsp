@@ -37,7 +37,7 @@
 							<li><a href="ta_user.jsp">Attractions</a></li>
 							<li><a href="FlightSearch_user.jsp">Flights</a></li>
 							<li><a href="#contact">Hotels</a></li>
-							<li><a href="#contact">Contact us</a></li>
+							<li><a href="contact_user.jsp">Contact us</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li><a>Welcome, ${sessionScope.username}</a></li>
