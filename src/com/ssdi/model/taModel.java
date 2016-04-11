@@ -9,10 +9,9 @@ import com.ssdi.POJO.taBean;
 public class taModel {
 	
 	static Connection currentCon = null;
-    static ArrayList<taBean> taList = new ArrayList<taBean>();
 	
 	public static ArrayList<taBean> searchRegions(String location) {
-		taList.clear();
+		ArrayList<taBean> taList = new ArrayList<taBean>();
 		Statement stmt = null;
     	ResultSet rs = null;
     	
@@ -45,7 +44,7 @@ public class taModel {
 	}
 	
 	public static ArrayList<taBean> searchAttractions(String location) {
-		taList.clear();
+		ArrayList<taBean> taList = new ArrayList<taBean>();
 		Statement stmt = null;
     	ResultSet rs = null;
     	
