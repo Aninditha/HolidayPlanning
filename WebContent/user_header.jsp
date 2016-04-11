@@ -7,15 +7,11 @@
 <meta name="description" content="Hello World">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-	crossorigin="anonymous">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <!-- Optional theme -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
-	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
-	crossorigin="anonymous">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 
 </head>
 
@@ -34,24 +30,23 @@
 								class="icon-bar"></span> <span class="icon-bar"></span> <span
 								class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="home.jsp">Holiday Planning</a>
+						<a class="navbar-brand" href="home.html">Holiday Planning</a>
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
-							<li><a href="ta.jsp">Attractions</a></li>
-							<li><a href="FlightSearch.jsp">Flights</a></li>
-							<li><a href="hotel.jsp">Hotels</a></li>
+							<li><a href="#">Attractions</a></li>
+							<li><a href="#about">Flights</a></li>
+							<li><a href="#contact">Hotels</a></li>
 							<li><a href="#contact">Contact us</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							<li><a href="LoginPage.jsp">Login</a></li>
-							<li><a href="RegisterPage.jsp">Register</a></li>
+							<li><a>Welcome, ${requestScope.username}</a></li>
+							<li><a href="home.jsp"> Log Out</a></li>
 							<li><a href="#"> </a></li>
 						</ul>
 					</div>
 				</div>
 			</nav>
-
 		</div>
 	</div>
 

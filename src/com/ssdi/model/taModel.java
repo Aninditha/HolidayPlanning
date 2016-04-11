@@ -10,20 +10,16 @@ public class taModel {
 	
 	static Connection currentCon = null;
     static ArrayList<taBean> taList = new ArrayList<taBean>();
-	static String locationType, locationID;
 	
-	public static ArrayList<taBean> search(String location) {
+	public static ArrayList<taBean> searchRegions(String location) {
 		
 		Statement stmt = null;
     	ResultSet rs = null;
     	
-    	String regionName, rDescription;
-    	String attractionName, aDescription;
-    	String locationName;
+    	String regionName, description;
     	
-    	locationName = location;
-    	
-    	String Query = "select * from location where location_name = \""+ locationName + "\";";
+    	String Query = "select * from country inner join region on "
+    			+ "country.Country_ID = region.Country_ID where Country_name =\""+ location + "\";";
     	try {
 			//connect to DB
 	  		currentCon = DBConnection.getConnection();
@@ -32,56 +28,51 @@ public class taModel {
 			rs = stmt.executeQuery(Query);
 			while(rs.next())
 			{
-				locationID = rs.getString("location_ID");
-				locationType = rs.getString("location_type");
-				System.out.println(locationID +""+ locationType);
-	  		}
-			if(locationType.equals("country")){
-				
-				System.out.println("qwerty");
-				Query = "select * from region where location_ID = \""+ locationID +"\";";
 				System.out.println(Query);
-				rs = stmt.executeQuery(Query);
-				while(rs.next())
-				{
-					taBean loc = new taBean();
-					regionName = rs.getString("region_name");
-					rDescription = rs.getString("description");
-					System.out.println(regionName);
-					loc.setRegionName(regionName);
-					loc.setDescription(rDescription);
-					taList.add(loc);
-		  		}
-			}
-			if(locationType.equals("region")){
-				
-				System.out.println("qwerty");
-				Query = "select * from attractions where location_ID = \""+ locationID +"\";";
-				System.out.println(Query);
-				rs = stmt.executeQuery(Query);
-				while(rs.next())
-				{
-					taBean loc = new taBean();
-					attractionName = rs.getString("attraction_name");
-					aDescription = rs.getString("description");
-					
-					loc.setAttractionName(attractionName);
-					loc.setDescription(aDescription);
-					taList.add(loc);
-					//System.out.println(loc.getAttractionName());
-		  		}
+				taBean loc = new taBean();
+				regionName = rs.getString("region_name");
+				description = rs.getString("description");
+				System.out.println(regionName + " " + description);
+				System.out.println(regionName);
+				loc.setRegionName(regionName);
+				loc.setDescription(description);
+				taList.add(loc);
 			}
     	} catch (Exception e){
     		e.printStackTrace();
     	}
+		return taList;
+	}
+	
+	public static ArrayList<taBean> searchAttractions(String location) {
+		
+		Statement stmt = null;
+    	ResultSet rs = null;
     	
-    	for (int i = 0; i < taList.size(); i++) {
-            //System.out.println(i+" "+taList.get(i));
-            System.out.println(taList.get(i).getAttractionName());
-            System.out.println(taList.get(i).getDescription());
-            
+    	String attractionName, description;
+    	
+    	String Query = "select * from region inner join attractions on "
+    			+ "region.region_ID = attractions.region_ID where region_name =\""+ location + "\";";
+    	try {
+			//connect to DB
+	  		currentCon = DBConnection.getConnection();
+	  		stmt = currentCon.createStatement();
+	  		
+			rs = stmt.executeQuery(Query);
+			while(rs.next())
+			{
+				System.out.println(Query);
+				taBean loc = new taBean();
+				attractionName = rs.getString("attraction_name");
+				description = rs.getString("description");
+				System.out.println(attractionName + " "+ description);
+				loc.setAttractionName(attractionName);
+				loc.setDescription(description);
+				taList.add(loc);
+			}
+    	} catch (Exception e){
+    		e.printStackTrace();
     	}
 		return taList;
 	}
-
 }

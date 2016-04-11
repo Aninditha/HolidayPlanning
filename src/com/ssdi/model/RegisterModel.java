@@ -18,8 +18,9 @@ public class RegisterModel {
 	    String Query = "insert into CustomerDetails (Name, Email, password)"
         + " values (?, ?, ?)";
 	  	      
-	  	System.out.println("Your user name is " + bean.getUsername());         
-	  	System.out.println("Your password is " + bean.getPassword());
+	  	System.out.println("Your user name is " + un);
+	  	System.out.println("Your password is " + pwd);
+	  	System.out.println("Your email is " + em);
 	  	System.out.println("Query: "+Query);
 	  	
 	  	try{
@@ -42,5 +43,36 @@ public class RegisterModel {
 	  		System.out.println("Log In failed: An Exception has occurred! " + ex);
 	  	}
 	  	return bean;
+	}
+
+	public static boolean check(String email) {
+		boolean exist = false;
+		
+		Statement stmt = null;
+    	ResultSet rs = null;
+    	int number = 0;
+    	currentCon = DBConnection.getConnection();
+		
+		String Query = "select * from CustomerDetails where Email = \""+ email +"\";";
+		System.out.println(Query);
+		try {
+			//connect to DB
+	  		currentCon = DBConnection.getConnection();
+	  		
+	  		stmt = currentCon.createStatement();
+	  		
+			rs = stmt.executeQuery(Query);
+			while(rs.next()){
+				if (rs.last())
+					number = rs.getRow();
+			}
+			if(number == 1)
+				exist = true;
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		System.out.println(exist);
+		return exist;
 	}	
 }

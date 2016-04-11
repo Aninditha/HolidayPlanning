@@ -81,18 +81,20 @@ body {
 	<%@include file="ExtraHeader.jsp"%>
 	<form class="form-goup" role="form" action='Register' method="POST"
 		id="myform" data-toggle="validator">
-		<div class="container" style="text-align: center">
+		<div class="container" style = "text-align: center">
 			<div class="Absolute-Center is-Responsive">
 				<div class="page-header">
 					<h1>Registration Page</h1>
-					<h3 class="section-subheading text-muted">Enter the
-						registration details</h3>
+					<h3 class="section-subheading text-muted">Enter the registration details</h3>
+					<br />
+					<p align="right"><font color="red"><h3>Email Id already exists.. Try again..!!</h3></font></p>
+			<br/>
 				</div>
 				<br />
 
 			</div>
 
-			<div class="form-group row" class="form-inline">
+			<div class="form-group row" class="form-inline" >
 				<!-- Username -->
 				<label class="control-label col-sm-2" for="username"
 					class="textfield"><h4>Username</h4></label>
@@ -113,7 +115,7 @@ body {
 						placeholder="" required> <span class="glyphicon"></span>
 				</div>
 			</div>
-
+			
 			<div class="form-group row" class="form-inline">
 				<label class="control-label col-sm-2" for="password"><h4>Password</h4></label>
 
@@ -137,8 +139,8 @@ body {
 					</div>
 				</div>
 				<div class="form-group row" class="form-inline">
-					<label class="control-label col-sm-2" for="password"><h4>Confirm
-							Password</h4></label>
+					<h4><label class="control-label col-sm-2" for="password">Confirm
+						Password</label></h4>
 					<div class="col-sm-5">
 						<input required type="password" class="form-control"
 							name="password2" id="password2" placeholder="Repeat Password"

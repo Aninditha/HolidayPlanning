@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app
-    xmlns="http://java.sun.com/xml/ns/javaee" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-    version="3.0">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
 	<welcome-file-list>
-    <welcome-file>home.jsp</welcome-file>
-  
-  </welcome-file-list>
+		<welcome-file>home.jsp</welcome-file>
+	</welcome-file-list>
+
 	<servlet>
 		<servlet-name>Register</servlet-name>
 		<servlet-class>com.ssdi.controller.Register</servlet-class>
@@ -24,7 +22,15 @@
 		<servlet-name>TASearch</servlet-name>
 		<servlet-class>com.ssdi.controller.TASearch</servlet-class>
 	</servlet>
-	
+	<servlet>
+		<servlet-name>TARegionSearch</servlet-name>
+		<servlet-class>com.ssdi.controller.TARegionSearch</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>LogIn</servlet-name>
+		<servlet-class>com.ssdi.controller.LogIn</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>Register</servlet-name>
 		<url-pattern>/Register</url-pattern>
@@ -41,5 +47,13 @@
 		<servlet-name>TASearch</servlet-name>
 		<url-pattern>/TASearch</url-pattern>
 	</servlet-mapping>
-	
+	<servlet-mapping>
+		<servlet-name>TARegionSearch</servlet-name>
+		<url-pattern>/TARegionSearch</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LogIn</servlet-name>
+		<url-pattern>/LogIn</url-pattern>
+	</servlet-mapping>
+
 </web-app>

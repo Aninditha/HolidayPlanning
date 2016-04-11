@@ -64,19 +64,19 @@ body {
 		<h3>Search for Tourist Attractions</h3>
 		<h4>Enter a location</h4>
 		<FORM NAME="radioLinks">
-			<INPUT TYPE="radio" NAME="pickme" id="Countries" checked=""
+			<INPUT TYPE="radio" NAME="pickme" id="Countries"
 				onClick="document.location='ta.jsp';" /> Country <INPUT
-				TYPE="radio" NAME="pickme" id="RoundTrip"
+				TYPE="radio" NAME="pickme" id="RoundTrip" checked=""
 				onClick="document.location='ta_region.jsp';" /> Region
 
 		</FORM>
 
-		<form action="TASearch" method="post" class="form-inline">
+		<form action="TARegionSearch" method="post" class="form-inline">
 			<div class="form-group">
-				<label class="control-label" for="usr">Country:</label>
+				<label class="control-label" for="usr">Region:</label>
 				<input
-					required type="text" name="country" class="form-control" id="usr"
-					placeholder="Enter a Country">
+					required type="text" name="region" class="form-control" id="usr"
+					placeholder="Enter a Region">
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-default">Search</button>
@@ -103,7 +103,8 @@ body {
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
 		integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous">
+	</script>
 	<%@include file="footer.jsp"%>
 </body>
 </html>

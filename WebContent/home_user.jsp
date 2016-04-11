@@ -45,7 +45,7 @@
 <!-- NAVBAR
 ================================================== -->
 <body>
-	<%@include file="Header.jsp"%>
+	<%@include file="user_header.jsp"%>
 
 	<!-- Carousel ================================================== -->
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">

@@ -2,57 +2,32 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<title>header</title>
-	<meta name="description" content="Hello World">
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<meta charset="utf-8">
+<title>header</title>
+<meta name="description" content="Hello World">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 
 </head>
 
 <body>
-    <br>
-    <div class="navbar-wrapper">
-      <div class="container">
-
-        <nav class="navbar navbar-inverse navbar-static-top">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="home.html">Holiday Planning</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li><a href="#">Attractions</a></li>
-                <li><a href="#about">Flights</a></li>
-                <li><a href="#contact">Hotels</a></li>
-                <li><a href="#contact">Contact us</a></li>  
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                 <li > <a href="#">Welcome, ${requestScope.username}</li>
-                <li><a href="#">                  </a></li>
-              </ul>
-            </div>
-            
-          
-          </div>
-        </nav>
-        
-        <p>  <h3> Registration Successful. </h3> </p>
-
-      </div>
-    </div>
+	<%@include file="user_header.jsp"%>
+	<div class="navbar-wrapper">
+		<div class="container">
+			<p> <h3>Registration Successful.</h3>
+		</div>
+	</div>
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="http://code.jquery-2.2.2.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-</body>	
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+		integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+		crossorigin="anonymous"></script>
+</body>
 </html>

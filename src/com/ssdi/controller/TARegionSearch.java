@@ -3,7 +3,6 @@ package com.ssdi.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,17 +13,17 @@ import com.ssdi.POJO.taBean;
 import com.ssdi.model.taModel;
 
 /**
- * Servlet implementation class TASearch
+ * Servlet implementation class TARegionSearch
  */
-@WebServlet("/TASearch")
-public class TASearch extends HttpServlet {
+@WebServlet("/TARegionSearch")
+public class TARegionSearch extends HttpServlet {
 	static List<taBean> taList = new ArrayList<>();
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TASearch() {
+    public TARegionSearch() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,19 +33,19 @@ public class TASearch extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		try{
 			taBean location = new taBean();
-		    location.setLocation(request.getParameter("country"));
-		    String country = location.getLocation();
-		    taList = taModel.searchRegions(country);
+			System.out.println(request.getAttribute("region"));
+		    location.setLocation("Delhi");
+		    String region = location.getLocation();
+		    System.out.println(region);
+		    taList = taModel.searchAttractions(region);
 		    System.out.println("size in controller: "+taList.size());
 		    System.out.println(taList);
 		} catch(Exception e){
@@ -54,9 +53,8 @@ public class TASearch extends HttpServlet {
 		}
 		
 		request.setAttribute("taList",taList);
-		for(int i=0; i<taList.size(); i++)
-			System.out.println(taList.get(i).getRegionName());
-		RequestDispatcher rd = request.getRequestDispatcher("/taSearchList.jsp");
-		rd.forward(request,response);	
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/taAttractionList.jsp");
+		rd.forward(request,response);
 	}
 }

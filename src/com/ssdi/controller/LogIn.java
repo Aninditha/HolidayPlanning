@@ -1,8 +1,6 @@
 package com.ssdi.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,21 +8,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.ssdi.POJO.taBean;
-import com.ssdi.model.taModel;
+import com.ssdi.POJO.userbean;
+import com.ssdi.model.LoginModel;
 
 /**
- * Servlet implementation class TASearch
+ * Servlet implementation class LogIn
  */
-@WebServlet("/TASearch")
-public class TASearch extends HttpServlet {
-	static List<taBean> taList = new ArrayList<>();
+@WebServlet("/LogIn")
+public class LogIn extends HttpServlet {
+	
+	boolean Exist = false;
+	String username;
+	
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TASearch() {
+    public LogIn() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,22 +42,24 @@ public class TASearch extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		try{
-			taBean location = new taBean();
-		    location.setLocation(request.getParameter("country"));
-		    String country = location.getLocation();
-		    taList = taModel.searchRegions(country);
-		    System.out.println("size in controller: "+taList.size());
-		    System.out.println(taList);
+			userbean User = new userbean();
+		    User.setUsername(request.getParameter("username"));
+		    User.setPassword(request.getParameter("password"));
+		    username = User.getUsername();
+		    String password = User.getPassword();
+		    Exist = LoginModel.search(username, password);
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-		
-		request.setAttribute("taList",taList);
-		for(int i=0; i<taList.size(); i++)
-			System.out.println(taList.get(i).getRegionName());
-		RequestDispatcher rd = request.getRequestDispatcher("/taSearchList.jsp");
-		rd.forward(request,response);	
+		if(Exist){
+			request.setAttribute("username", username);
+			RequestDispatcher rd = request.getRequestDispatcher("/home_user.jsp");
+			rd.forward(request,response);
+		}
+		else{
+			RequestDispatcher rd = request.getRequestDispatcher("/LoginPageError.jsp");
+			rd.forward(request,response);
+		}
 	}
 }
