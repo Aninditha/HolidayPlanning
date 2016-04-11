@@ -88,12 +88,9 @@ $(document).ready(function() {
 			</thead>
 			<tbody>
 				<c:forEach items="${requestScope.taList}" var="item">
-					<form action="TARegionSearch" method = "POST">
+					<form action="TARegionSearch?regionName=${item.regionName}" method = "POST">
 						<tr>
-							<td><c:out value="${item.regionName}" /></label></td>
-							<script>
-							requst.setAttribute("region","${item.regionName}");
-							</script>
+							<td><c:out value="${item.regionName}" /></td>
 							<td><c:out value="${item.description}" /></td>
 							<td><button type="submit" class="btn btn-default">view>></button> </td>
 						</tr>

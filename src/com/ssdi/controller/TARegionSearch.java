@@ -42,7 +42,7 @@ public class TARegionSearch extends HttpServlet {
 		try{
 			taBean location = new taBean();
 			//System.out.println(request.getAttribute("region"));
-		    location.setLocation(request.getParameter("region"));
+		    location.setLocation(request.getParameter("regionName"));
 		    String region = location.getLocation();
 		    System.out.println(region);
 		    taList = taModel.searchAttractions(region);

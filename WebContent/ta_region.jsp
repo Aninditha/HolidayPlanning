@@ -75,7 +75,7 @@ body {
 			<div class="form-group">
 				<label class="control-label" for="usr">Region:</label>
 				<input
-					required type="text" name="region" class="form-control" id="usr"
+					required type="text" name="regionName" class="form-control" id="usr"
 					placeholder="Enter a Region">
 			</div>
 			<div class="form-group">
