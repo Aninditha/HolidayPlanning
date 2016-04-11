@@ -41,8 +41,8 @@ public class TARegionSearch extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
 			taBean location = new taBean();
-			System.out.println(request.getAttribute("region"));
-		    location.setLocation("Delhi");
+			//System.out.println(request.getAttribute("region"));
+		    location.setLocation(request.getParameter("region"));
 		    String region = location.getLocation();
 		    System.out.println(region);
 		    taList = taModel.searchAttractions(region);
@@ -51,7 +51,6 @@ public class TARegionSearch extends HttpServlet {
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-		
 		request.setAttribute("taList",taList);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/taAttractionList.jsp");

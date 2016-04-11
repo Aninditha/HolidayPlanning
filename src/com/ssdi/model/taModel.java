@@ -12,7 +12,7 @@ public class taModel {
     static ArrayList<taBean> taList = new ArrayList<taBean>();
 	
 	public static ArrayList<taBean> searchRegions(String location) {
-		
+		taList.clear();
 		Statement stmt = null;
     	ResultSet rs = null;
     	
@@ -45,7 +45,7 @@ public class taModel {
 	}
 	
 	public static ArrayList<taBean> searchAttractions(String location) {
-		
+		taList.clear();
 		Statement stmt = null;
     	ResultSet rs = null;
     	
@@ -64,7 +64,7 @@ public class taModel {
 				System.out.println(Query);
 				taBean loc = new taBean();
 				attractionName = rs.getString("attraction_name");
-				description = rs.getString("description");
+				description = rs.getString("attractions.description");
 				System.out.println(attractionName + " "+ description);
 				loc.setAttractionName(attractionName);
 				loc.setDescription(description);

@@ -90,7 +90,7 @@ $(document).ready(function() {
 				<c:forEach items="${requestScope.taList}" var="item">
 					<form action="TARegionSearch" method = "POST">
 						<tr>
-							<td><label name = "region"><c:out value="${item.regionName}" /></label></td>
+							<td><c:out value="${item.regionName}" /></label></td>
 							<script>
 							requst.setAttribute("region","${item.regionName}");
 							</script>
