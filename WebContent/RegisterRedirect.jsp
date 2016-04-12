@@ -19,7 +19,7 @@
 	<%@include file="user_header.jsp"%>
 	<div class="navbar-wrapper">
 		<div class="container">
-			<p> <h3>${session.getAttribute("username")}, Registration Successful.</h3>
+			<p> <h3>Registration Successful.</h3>
 		</div>
 	</div>
 

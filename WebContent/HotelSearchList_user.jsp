@@ -13,22 +13,19 @@
 
 <title>Holiday Planning</title>
 
-<%@include file="Header.jsp" %>
+<%@include file="user_header.jsp"%>
 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
-    <script type="text/javascript" src="jquery-1.12.2.min.js"></script>
-   
-<script type="text/javascript" src="jquery.tablesorter.js"></script> 
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+<script type="text/javascript" src="jquery-1.12.2.min.js"></script>
+
+<script type="text/javascript" src="jquery.tablesorter.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
 <link rel="stylesheet" type="text/css"
 	href="css/bootstrap-theme.min.css">
-
-
-<script >
-
-
+<script>
 $("#myTable").tablesorter(); 
 
 $(document).ready(function() { 
@@ -56,9 +53,6 @@ $(document).ready(function() {
         } 
     }); 
 });
-
- 
-
 </script>
 
 <script src="jquery.tablesorter.js"> </script>
@@ -66,40 +60,35 @@ $(document).ready(function() {
 
 <link href="css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="css/center-block.css">
-
 </head>
 
 <body>
-<div class="container">
-
-
- <table class="tablesorter table table-bordered table-striped"  class="sortable" id="myTable"> 
-
-<thead> 
-      <tr>
-        <th class="header">  Name </th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Rating</th>
-        <th>Type Of Room</th>
-        <th>Vacancies </th>
-      </tr>
-       </thead>
-<tbody>
-  <c:forEach items="${requestScope.hotelList}" var="item"> 	
-     <tr >
-      
-      <td><c:out value="${item.hotelName}" /></td> 
-  	  <td><c:out value="${item.description}" /></td> 
-  	  <td><c:out value="${item.price}" /> </td> 
-  	  <td><c:out value="${item.rating}" /></td> 
-  	  <td><c:out value="${item.typeOfRoom}" /></td> 
-  	  <td><c:out value="${item.numberOfVacancies}" /></td>
-  	  </tr>
-   </c:forEach>
-   </tbody>
-</table>
-</div>
-
+	<div class="container">
+		<table class="tablesorter table table-bordered table-striped"
+			class="sortable" id="myTable">
+			<thead>
+				<tr>
+					<th class="header">Name</th>
+					<th>Description</th>
+					<th>Price</th>
+					<th>Rating</th>
+					<th>Type Of Room</th>
+					<th>Vacancies</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${requestScope.hotelList}" var="item">
+					<tr>
+						<td><c:out value="${item.hotelName}" /></td>
+						<td><c:out value="${item.description}" /></td>
+						<td><c:out value="${item.price}" /></td>
+						<td><c:out value="${item.rating}" /></td>
+						<td><c:out value="${item.typeOfRoom}" /></td>
+						<td><c:out value="${item.numberOfVacancies}" /></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>

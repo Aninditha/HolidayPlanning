@@ -10,10 +10,10 @@ import com.ssdi.POJO.hotelBean;
 public class HotelModel {
 	
 	static Connection currentCon = null;
-    static ArrayList<hotelBean> hotel = new ArrayList<hotelBean>();
 	
     public static ArrayList<hotelBean> search(hotelBean bean) throws SQLException {
     	
+    	ArrayList<hotelBean> hotel = new ArrayList<hotelBean>();
     	Statement stmt = null;
     	ResultSet rs = null;
     	String hotelName = null;
@@ -39,12 +39,12 @@ public class HotelModel {
 			while(rs.next())
 			{
 				regionID = rs.getString("region_ID");
-				System.out.println(regionID);
+				System.out.println("region_ID" + regionID);
 	  		}
 			
 			String hotelQuery = "select * from hotel where region_ID = \""+ regionID +"\";";
 			rs = stmt.executeQuery(hotelQuery);
-		    
+		    System.out.println(hotelQuery);
 		    while (rs.next()) {
 		    	System.out.println("qwerty");
 		    	hotelBean hotelData = new hotelBean();

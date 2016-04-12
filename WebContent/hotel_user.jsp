@@ -39,7 +39,7 @@ body {
 
 <body>
 
-	<%@include file="Header.jsp"%>
+	<%@include file="user_header.jsp"%>
 	<section>
 
 		<div class="container text-center">
