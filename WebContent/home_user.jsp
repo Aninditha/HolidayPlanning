@@ -205,7 +205,7 @@
 						attractions to explore & destinations to visit for a memorable
 						tour·</p>
 					<p>
-						<a class="btn btn-default" href="ta.jsp" role="button">Search
+						<a class="btn btn-default" href="ta_user.jsp" role="button">Search
 							&raquo;</a>
 					</p>
 				</div>
@@ -221,7 +221,7 @@
 						quickly finding the flight combinations between two cities·</p>
 					<br>
 					<p>
-						<a class="btn btn-default" href="FlightSearch.jsp" role="button">Search
+						<a class="btn btn-default" href="FlightSearch_user.jsp" role="button">Search
 							&raquo;</a>
 					</p>
 				</div>
@@ -238,7 +238,7 @@
 						Holidayplanning.com India has the best deals and discounts for
 						hotel rooms anywhere·</p>
 					<p>
-						<a class="btn btn-default" href="hotel.jsp" role="button">Search
+						<a class="btn btn-default" href="hotel_user.jsp" role="button">Search
 							&raquo;</a>
 					</p>
 				</div>

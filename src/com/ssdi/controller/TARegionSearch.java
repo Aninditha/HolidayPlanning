@@ -39,26 +39,38 @@ public class TARegionSearch extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		boolean Exist = false;
+		
 		try{
 			taBean location = new taBean();
-			//System.out.println(request.getAttribute("region"));
 		    location.setLocation(request.getParameter("regionName"));
 		    String region = location.getLocation();
-		    System.out.println(region);
+		    Exist = taModel.checkRegion(region);
 		    taList = taModel.searchAttractions(region);
-		    System.out.println("size in controller: "+taList.size());
-		    System.out.println(taList);
+		    if(Exist){
+		    	request.setAttribute("taList",taList);
+				if (request.getSession().getAttribute("username") != null){
+					RequestDispatcher rd = request.getRequestDispatcher("/taAttractionList_user.jsp");
+					rd.forward(request,response);
+				}
+				else{
+					RequestDispatcher rd = request.getRequestDispatcher("/taAttractionList.jsp");
+					rd.forward(request,response);
+				}
+		    }
+		    else{
+		    	if (request.getSession().getAttribute("username") != null){
+					RequestDispatcher rd = request.getRequestDispatcher("/taError_user.jsp");
+					rd.forward(request,response);
+				}
+				else{
+					RequestDispatcher rd = request.getRequestDispatcher("/taError.jsp");
+					rd.forward(request,response);
+				}
+		    }
 		} catch(Exception e){
 			e.printStackTrace();
-		}
-		request.setAttribute("taList",taList);
-		if (request.getSession().getAttribute("username") != null){
-			RequestDispatcher rd = request.getRequestDispatcher("/taAttractionList_user.jsp");
-			rd.forward(request,response);
-		}
-		else{
-			RequestDispatcher rd = request.getRequestDispatcher("/taAttractionList.jsp");
-			rd.forward(request,response);
 		}
 	}
 }

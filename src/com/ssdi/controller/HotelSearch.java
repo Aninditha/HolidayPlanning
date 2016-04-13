@@ -43,23 +43,37 @@ public class HotelSearch extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		boolean Exist = false;
 		try{
 			hotelBean region = new hotelBean();
 		    region.setRegion(request.getParameter("region"));
+		    String place = region.getRegion();
+		    Exist = HotelModel.check(place);
 		    hotelList = HotelModel.search(region);
-		    System.out.println("size in controller: "+hotelList.size());
+		    System.out.println(Exist);
+		    if(Exist){
+		    	request.setAttribute("hotelList",hotelList);
+				if (request.getSession().getAttribute("username") != null){
+					RequestDispatcher rd = request.getRequestDispatcher("/HotelSearchList_user.jsp");
+					rd.forward(request,response);
+				}
+				else{
+					RequestDispatcher rd = request.getRequestDispatcher("/HotelSearchList.jsp");
+					rd.forward(request,response);
+				}
+		    }
+		    else{
+		    	if (request.getSession().getAttribute("username") != null){
+					RequestDispatcher rd = request.getRequestDispatcher("/hotelError_user.jsp");
+					rd.forward(request,response);
+				}
+				else{
+					RequestDispatcher rd = request.getRequestDispatcher("/hotelError.jsp");
+					rd.forward(request,response);
+				}
+		    }
 		} catch(Exception e){
 			e.printStackTrace();
-		}
-		
-		request.setAttribute("hotelList",hotelList);
-		if (request.getSession().getAttribute("username") != null){
-			RequestDispatcher rd = request.getRequestDispatcher("/HotelSearchList_user.jsp");
-			rd.forward(request,response);
-		}
-		else{
-			RequestDispatcher rd = request.getRequestDispatcher("/HotelSearchList.jsp");
-			rd.forward(request,response);
 		}
 	}
 }

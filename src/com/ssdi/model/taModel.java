@@ -74,4 +74,66 @@ public class taModel {
     	}
 		return taList;
 	}
+	
+	public static boolean checkCountry(String country) {
+		boolean exist = false;
+		
+		Statement stmt = null;
+    	ResultSet rs = null;
+    	int number = 0;
+    	currentCon = DBConnection.getConnection();
+		
+		String Query = "select * from country where country_name = \""+ country +"\";";
+		System.out.println(Query);
+		try {
+			//connect to DB
+	  		currentCon = DBConnection.getConnection();
+	  		
+	  		stmt = currentCon.createStatement();
+	  		
+			rs = stmt.executeQuery(Query);
+			while(rs.next()){
+				if (rs.last())
+					number = rs.getRow();
+			}
+			if(number == 1)
+				exist = true;
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		System.out.println(exist);
+		return exist;
+	}
+	
+	public static boolean checkRegion(String region) {
+		boolean exist = false;
+		
+		Statement stmt = null;
+    	ResultSet rs = null;
+    	int number = 0;
+    	currentCon = DBConnection.getConnection();
+		
+		String Query = "select * from region where region_name = \""+ region +"\";";
+		System.out.println(Query);
+		try {
+			//connect to DB
+	  		currentCon = DBConnection.getConnection();
+	  		
+	  		stmt = currentCon.createStatement();
+	  		
+			rs = stmt.executeQuery(Query);
+			while(rs.next()){
+				if (rs.last())
+					number = rs.getRow();
+			}
+			if(number == 1)
+				exist = true;
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		System.out.println(exist);
+		return exist;
+	}
 }

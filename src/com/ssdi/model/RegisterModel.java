@@ -74,5 +74,5 @@ public class RegisterModel {
 		}
 		System.out.println(exist);
 		return exist;
-	}	
+	}
 }

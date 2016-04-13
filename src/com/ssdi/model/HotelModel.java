@@ -76,4 +76,37 @@ public class HotelModel {
 		}
 	return hotel;
 	}
+    
+    public static boolean check(String region) {
+		boolean exist = false;
+		
+		Statement stmt = null;
+    	ResultSet rs = null;
+    	int number = 0;
+    	currentCon = DBConnection.getConnection();
+		
+		String Query = "select * from region inner join hotel on "
+				+ "region.region_ID = hotel.region_ID where region_name =\""+ region + "\";";
+		
+		System.out.println(Query);
+		try {
+			//connect to DB
+	  		currentCon = DBConnection.getConnection();
+	  		
+	  		stmt = currentCon.createStatement();
+	  		
+			rs = stmt.executeQuery(Query);
+			while(rs.next()){
+				if (rs.last())
+					number = rs.getRow();
+			}
+			if(number > 1)
+				exist = true;
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		System.out.println(exist);
+		return exist;
+	}
 }
