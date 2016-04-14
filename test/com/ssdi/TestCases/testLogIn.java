@@ -5,13 +5,16 @@ import static org.junit.Assert.assertEquals;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
+import org.junit.Test;
+
 import com.ssdi.util.TestConnection;
 
 public class testLogIn {
-	static boolean userExist = false;
-	static Connection currentCon = null;
-	
-	public static void testLogin(String username, String password) {
+	boolean userExist = false;
+	 Connection currentCon = null;
+	@Test
+	public  void testLogin() {
 		
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -32,7 +35,7 @@ public class testLogIn {
 			stmt = currentCon.createStatement();
 			rs = stmt.executeQuery(selectQuery);
 			rs.next();
-			assertEquals(rs.getString("Email"), "project@ssdi.com");
+			String em = rs.getString("Email");
 			assertEquals(rs.getString("password"), "qwerty");
 			
 		} catch (Exception e){
