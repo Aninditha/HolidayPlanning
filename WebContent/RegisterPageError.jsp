@@ -10,11 +10,13 @@
 
 <title>Holiday Planning</title>
 
+<%@include file="ExtraHeader.jsp"%>
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-
+<link rel="stylesheet" type="text/css" href="css/label.css">
 <link rel="stylesheet" type="text/css"
 	href="css/bootstrap-theme.min.css">
 
@@ -74,92 +76,96 @@ body {
 	transform: translateY(4px);
 }
 </style>
-
 </head>
 
 <body>
-	<%@include file="ExtraHeader.jsp"%>
 	<form class="form-goup" role="form" action='Register' method="POST"
 		id="myform" data-toggle="validator">
-		<div class="container" style = "text-align: center">
-			<div class="Absolute-Center is-Responsive">
-				<div class="page-header">
-					<h1>Registration Page</h1>
-					<h3 class="section-subheading text-muted">Enter the registration details</h3>
-					<br />
-					<p align="right"><font color="red"><h3>Email Id already exists.. Try again..!!</h3></font></p>
-			<br/>
-				</div>
-				<br />
-
-			</div>
-
-			<div class="form-group row" class="form-inline" >
-				<!-- Username -->
-				<label class="control-label col-sm-2" for="username"
-					class="textfield"><h4>Username</h4></label>
-
-				<div class="controls col-sm-5">
-					<input type="text" class="form-control" id="username"
-						name="username" placeholder="" required> <span
-						class="glyphicon"></span>
-				</div>
-			</div>
-
-			<div class="form-group row" class="form-inline">
-				<!-- E-mail -->
-				<label class="control-label col-sm-2" for="email"><h4>E-mail</h4></label>
-
-				<div class="controls col-sm-5">
-					<input type="email" class="form-control" id="email" name="email"
-						placeholder="" required> <span class="glyphicon"></span>
-				</div>
-			</div>
-			
-			<div class="form-group row" class="form-inline">
-				<label class="control-label col-sm-2" for="password"><h4>Password</h4></label>
-
-				<div class="col-sm-5">
-					<input required type="password" class="form-control"
-						name="password1" id="password1" placeholder="New Password"
-						autocomplete="off">
-				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<span id="8char" class="glyphicon glyphicon-remove"
-							style="color: #FF0004;"></span> 8 Characters Long<br> <span
-							id="ucase" class="glyphicon glyphicon-remove"
-							style="color: #FF0004;"></span> One Uppercase Letter
+		<div class="container">
+			<div class="hero-unit">
+				<div class="Absolute-Center is-Responsive text-center">
+					<div class="page-header">
+						<h1>Registration Page</h1>
+						<h3 class="section-subheading text-muted">Enter the
+							registration details</h3>
+						<br />
+						<p align="right">
+							<font color="red"><h3>Email Id already exists.. Try
+									again..!!</h3></font>
+						</p>
+						<br />
 					</div>
-					<div class="col-sm-6">
-						<span id="lcase" class="glyphicon glyphicon-remove"
-							style="color: #FF0004;"></span> One Lowercase Letter<br> <span
-							id="num" class="glyphicon glyphicon-remove"
-							style="color: #FF0004;"></span> One Number
+					<br />
+				</div>
+				<div class="form-group row" class="form-inline">
+					<!-- Username -->
+					<label class="control-label col-sm-3" for="username"
+						class="textfield">Username</label>
+					<div class="controls col-sm-6">
+						<input type="text" class="form-control" id="username"
+							name="username" placeholder="" required> <span
+							class="glyphicon"></span>
 					</div>
 				</div>
 				<div class="form-group row" class="form-inline">
-					<h4><label class="control-label col-sm-2" for="password">Confirm
-						Password</label></h4>
-					<div class="col-sm-5">
+					<!-- E-mail -->
+					<label class="control-label col-sm-3" for="email">E-mail</label>
+
+					<div class="controls col-sm-6">
+						<input type="email" class="form-control" id="email" name="email"
+							placeholder="" required> <span class="glyphicon"></span>
+					</div>
+				</div>
+				<div class="form-group row" class="form-inline">
+
+					<label class="control-label col-sm-3" for="password">Password</label>
+
+					<div class="col-sm-6">
 						<input required type="password" class="form-control"
-							name="password2" id="password2" placeholder="Repeat Password"
+							name="password1" id="password1" placeholder="New Password"
 							autocomplete="off">
 					</div>
+					<br> <br>
 					<div class="row">
-						<div class="col-sm-12">
-							<span id="pwmatch" class="glyphicon glyphicon-remove"
-								style="color: #FF0004;"></span> Passwords Match
+						<div class="col-sm-3 col-sm-offset-3">
+							<span id="8char" class="glyphicon glyphicon-remove"
+								style="color: #FF0004;"></span> 8 Characters Long<br> <span
+								id="ucase" class="glyphicon glyphicon-remove"
+								style="color: #FF0004;"></span> One Uppercase Letter
+						</div>
+						<div class="col-sm-3">
+							<span id="lcase" class="glyphicon glyphicon-remove"
+								style="color: #FF0004;"></span> One Lowercase Letter<br> <span
+								id="num" class="glyphicon glyphicon-remove"
+								style="color: #FF0004;"></span> One Number
 						</div>
 					</div>
-					<div class="form-group">
-						<div class="col-xs-6 col-xs-offset-3">
-							<button type="submit"
-								class="col-xs-6 btn btn-primary btn-load btn-lg">Register</button>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or &nbsp;&nbsp; <a href = "LoginPage.jsp"> Login</a>
-						</div>
-					</div>
+					<div class="form-group row" class="form-inline">
 
+						<label class="control-label col-sm-3" for="password">Confirm
+							Password</label>
+
+						<div class="col-sm-6">
+							<input required type="password" class="form-control"
+								name="password2" id="password2" placeholder="Repeat Password"
+								autocomplete="off">
+						</div>
+						<div class="row">
+							<div class="col-sm-12 col-sm-offset-3">
+								<span id="pwmatch" class="glyphicon glyphicon-remove"
+									style="color: #FF0004;"></span> Passwords Match
+							</div>
+						</div>
+						<br /> <br />
+						<div class="form-group">
+							<div class="col-xs-6 col-xs-offset-3">
+								<button type="submit"
+									class="col-xs-6 btn btn-primary btn-load btn-lg">Register</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or &nbsp;&nbsp; <a
+									href="LoginPage.jsp"> Login</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -274,7 +280,7 @@ body {
 	<script>
 		$('form').on('submit', function() {
 			if ($('#password1').val() != $('#password2').val()) {
-				alert('Password does not match');
+				alert('Password not matches');
 				return false;
 			}
 			return true;

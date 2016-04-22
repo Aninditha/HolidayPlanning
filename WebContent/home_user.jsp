@@ -199,11 +199,11 @@
 					<h2>Tourist Attractions</h2>
 					<p>Incredible India. Travel and get spellbound my its
 						magnificences. India offers a different aspect of her personality
-						â€“ exotic, extravagant, elegant, eclectic -- to ... Rural Tourism
-						Â· Mountain Trains & Luxury Trains etc. Holidayplanning.com is a
+						€“ exotic, extravagant, elegant, eclectic -- to ... Rural Tourism
+						· Mountain Trains & Luxury Trains etc. Holidayplanning.com is a
 						guide to things to do in India, places to visit, sights to see,
 						attractions to explore & destinations to visit for a memorable
-						tourÂ·</p>
+						tour·</p>
 					<p>
 						<a class="btn btn-default" href="ta_user.jsp" role="button">Search
 							&raquo;</a>
@@ -218,7 +218,7 @@
 						provides the listing of all the domestic and international
 						airlines operating scheduled flights to and from India...
 						Holidayplanning.com's search and booking engine helps you in
-						quickly finding the flight combinations between two citiesÂ·</p>
+						quickly finding the flight combinations between two cities·</p>
 					<br>
 					<p>
 						<a class="btn btn-default" href="FlightSearch_user.jsp" role="button">Search
@@ -236,7 +236,7 @@
 						recreational activities to build a positive relationship for
 						lifelong. From Luxury Hotels to Budget Accommodations,
 						Holidayplanning.com India has the best deals and discounts for
-						hotel rooms anywhereÂ·</p>
+						hotel rooms anywhere·</p>
 					<p>
 						<a class="btn btn-default" href="hotel_user.jsp" role="button">Search
 							&raquo;</a>

@@ -1,6 +1,5 @@
 package com.ssdi.POJO;
 
-import java.sql.Date;
 import java.sql.Time;
 
 public class flightBean {

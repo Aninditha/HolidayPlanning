@@ -1,23 +1,26 @@
 package com.ssdi.TestCases;
 
 import static org.junit.Assert.*;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.ssdi.POJO.hotelBean;
+import com.ssdi.model.ServicesDao;
+import com.ssdi.model.databaseFactory;
 import com.ssdi.util.ConnectionUtil;
 import com.ssdi.util.IConnectionData;
 import com.ssdi.util.TestConnection;
-import com.ssdi.model.databaseFactory;
-import com.ssdi.POJO.userbean;
-import com.ssdi.model.ServicesDao;
 
-public class testLogIn {
-	
+public class testHotelSearch {
+
 	private static databaseFactory factory;
 	private ServicesDao serviceDao;
 	
@@ -36,36 +39,39 @@ public class testLogIn {
 	}
 
 	@Test
-	public void testRegisterlogin() throws SQLException {
+	public void test() throws SQLException {
 		
 		IConnectionData connectionData = new TestConnection();
 		Connection testConnection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		userbean user= new userbean();
+		String insertSql = null, selectSql;
 		
-		user.setUsername("ssdiproject10");
-		user.setEmail("project10@ssdi.com");
-		user.setPassword("Qwerty123");
-		String selectSql = "select * from customerdetails where username = 'project10@ssdi.com' "
-				+ "and password = 'Qwerty123'";
-		
-		testConnection = ConnectionUtil.getConnection(connectionData);
-		
-		serviceDao.registerUser(user);
+		insertSql = "insert into hotel values ('r1', 'h1', 'taj', 'this is a 5 star hotel', 5000, 5.0, 'deluxe', 5);";
+		selectSql = "select * from hotel where region_ID = 'r1';";
 		
 		/* Invoke function under test */
-		assertTrue(serviceDao.logIn("project10@ssdi.com","Qwerty123"));
-
+		try {
+			testConnection = ConnectionUtil.getConnection(connectionData);
+			
+			statement = testConnection.createStatement();
+		    statement.executeUpdate(insertSql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		/* Invoke function under test */
+		hotelBean hotel= new hotelBean();
+		hotel.setRegion("delhi");
+		serviceDao.searchHotels(hotel);
+		
 		/* Verify that database was correctly fetched */ 
 		try {
 			statement = testConnection.createStatement();
 			resultSet = statement.executeQuery(selectSql);
 			
 			resultSet.next();
-			assertEquals(resultSet.getString("Email"), "project10@ssdi.com");
-			assertEquals(resultSet.getString("password"), "Qwerty123");
-			
+			assertEquals(resultSet.getString("hotel_name"), "taj");
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}

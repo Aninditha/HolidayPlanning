@@ -1,27 +1,32 @@
 package com.ssdi.util;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+public class TestConnection implements IConnectionData {
+	
+	// Driver
+	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	// Database URL
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/ssdi_test?autoReconnect=true&useSSL=false";
+	// Database credentials
+	private static final String USERNAME = "root";
+	private static final String PASSWORD = "root";
 
-public class TestConnection {
-	static Connection con;
-	static String url;
-         
-	public static Connection getConnection() {
-		try {
-			// create a mysql database connection
-			String myDriver = "com.mysql.jdbc.Driver";
-			String myUrl = "jdbc:mysql://localhost:3306/ssdi_test?autoReconnect=true&useSSL=false";
-			Class.forName(myDriver);
-			con = DriverManager.getConnection(myUrl,"root","root");
-		}
-		catch(ClassNotFoundException e) {
-			System.out.println(e);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return con;
+	@Override
+	public String getDriver() {
+		return JDBC_DRIVER;
+	}
+
+	@Override
+	public String getDBURL() {
+		return DB_URL;
+	}
+
+	@Override
+	public String getUserName() {
+		return USERNAME;
+	}
+
+	@Override
+	public String getPassword() {
+		return PASSWORD;
 	}
 }

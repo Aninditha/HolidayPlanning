@@ -4,21 +4,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.ssdi.POJO.flightBean;
-import com.ssdi.model.FlightModel;
+import com.ssdi.model.ServicesDao;
+import com.ssdi.model.databaseFactory;
 
 /**
  * Servlet implementation class FlightSearch
  */
+
 @WebServlet("/FlightSearch")
+
 public class FlightSearch extends HttpServlet {
 	
 	static List<flightBean> flightList = new ArrayList<>();
+	private ServicesDao serviceDao;
 	
 	private static final long serialVersionUID = 1L;
        
@@ -27,12 +33,20 @@ public class FlightSearch extends HttpServlet {
      */
     public FlightSearch() {
         super();
-      
     }
+    
+    public void init(ServletConfig config) throws ServletException {
 
+		super.init(config);
+		ServletContext context = getServletContext();
+		databaseFactory factory = databaseFactory.getInstance(context.getInitParameter("environment"));
+		serviceDao = factory.createServiceDao();
+	}
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
@@ -40,26 +54,23 @@ public class FlightSearch extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		
-		try{
-				    
+	
+		try{				    
 		    String source = request.getParameter("source");
 		    String destination = request.getParameter("destination");
 		    String startDate = request.getParameter("startDate");
 		    String endDate = request.getParameter("endDate");
 		    int capacity = Integer.parseInt(request.getParameter("capacity"));
 		    
-		    flightList = FlightModel.call_Flight_model(source, destination, startDate, endDate, capacity);
+		    flightList = serviceDao.searchFlights(source, destination, startDate, endDate, capacity);
 		    
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-		
 		request.setAttribute("source",request.getParameter("source") );
 		request.setAttribute("destination",request.getParameter("destination") );
-		
 		request.setAttribute("flightList",flightList);
 		if (request.getSession().getAttribute("username") != null){
 			RequestDispatcher rd = request.getRequestDispatcher("/FlightSearchList_user.jsp");
