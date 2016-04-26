@@ -4,32 +4,78 @@ import java.sql.Time;
 
 public class flightBean {
 	
-	private String source;
-	private String destination;
-	private String airlines;
-	private String startDate;
+	private String source1;
+	private String destination1;
+	private String departureTime1;
+	private String arrivalTime1;
+	private String DateOfDeparture1;
+	private String DateOfArrival1;
 	
+	private String source2;
+	private String destination2;
+	private String departureTime2;
+	private String arrivalTime2;
+	private String DateOfDeparture2;
+	private String DateOfArrival2;
+	
+	private String startDate;
 	private String endDate;
 	private String FlightID;
 	private String Price;
 	private int vacancies = 0, Stops;
-	private String departureTime;
-	private String arrivalTime;
-	private Time TravelTime, WaitTime;
-	private String DateOfDeparture;
-	private String DateOfArrival;
 	
-	public String getSource() {
-		return source;
+	private Time TravelTime, WaitTime;
+	
+	public String getSource2() {
+		return source2;
 	}
-	public void setSource(String source) {
-		this.source = source;
+	public void setSource2(String source2) {
+		this.source2 = source2;
 	}
-	public String getDestination() {
-		return destination;
+	public String getDestination2() {
+		return destination2;
 	}
-	public void setDestination(String destination) {
-		this.destination = destination;
+	public void setDestination2(String destination2) {
+		this.destination2 = destination2;
+	}
+	public String getDepartureTime2() {
+		return departureTime2;
+	}
+	public void setDepartureTime2(String departureTime2) {
+		this.departureTime2 = departureTime2;
+	}
+	public String getArrivalTime2() {
+		return arrivalTime2;
+	}
+	public void setArrivalTime2(String arrivalTime2) {
+		this.arrivalTime2 = arrivalTime2;
+	}
+	public String getDateOfDeparture2() {
+		return DateOfDeparture2;
+	}
+	public void setDateOfDeparture2(String dateOfDeparture2) {
+		DateOfDeparture2 = dateOfDeparture2;
+	}
+	public String getDateOfArrival2() {
+		return DateOfArrival2;
+	}
+	public void setDateOfArrival2(String dateOfArrival2) {
+		DateOfArrival2 = dateOfArrival2;
+	}
+	
+	
+	
+	public String getSource1() {
+		return source1;
+	}
+	public void setSource1(String source) {
+		this.source1 = source;
+	}
+	public String getDestination1() {
+		return destination1;
+	}
+	public void setDestination1(String destination) {
+		this.destination1 = destination;
 	}
 	public String getStartDate() {
 		return startDate;
@@ -43,12 +89,12 @@ public class flightBean {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	public String getAirlines() {
+	/*public String getAirlines() {
 		return airlines;
 	}
 	public void setAirlines(String airlines) {
 		this.airlines = airlines;
-	}
+	}*/
 	public String getPrice() {
 		return Price;
 	}
@@ -67,17 +113,17 @@ public class flightBean {
 	public void setStops(int stops) {
 		Stops = stops;
 	}
-	public String getDepartureTime() {
-		return departureTime;
+	public String getDepartureTime1() {
+		return departureTime1;
 	}
-	public void setDepartureTime(String string) {
-		this.departureTime = string;
+	public void setDepartureTime1(String string) {
+		this.departureTime1 = string;
 	}
-	public String getArrivalTime() {
-		return arrivalTime;
+	public String getArrivalTime1() {
+		return arrivalTime1;
 	}
-	public void setArrivalTime(String arrivalTime) {
-		this.arrivalTime = arrivalTime;
+	public void setArrivalTime1(String arrivalTime) {
+		this.arrivalTime1 = arrivalTime;
 	}
 	public Time getTravelTime() {
 		return TravelTime;
@@ -91,17 +137,17 @@ public class flightBean {
 	public void setWaitTime(Time waitTime) {
 		WaitTime = waitTime;
 	}
-	public String getDateOfDeparture() {
-		return DateOfDeparture.toString();
+	public String getDateOfDeparture1() {
+		return DateOfDeparture1.toString();
 	}
-	public void setDateOfDeparture(String string) {
-		DateOfDeparture = string;
+	public void setDateOfDeparture1(String string) {
+		DateOfDeparture1 = string;
 	}
-	public String getDateOfArrival() {
-		return DateOfArrival;
+	public String getDateOfArrival1() {
+		return DateOfArrival1;
 	}
-	public void setDateOfArrival(String dateOfArrival) {
-		DateOfArrival = dateOfArrival;
+	public void setDateOfArrival1(String dateOfArrival) {
+		DateOfArrival1 = dateOfArrival;
 	}
 	
 	public void setFlightID(String flightID) {

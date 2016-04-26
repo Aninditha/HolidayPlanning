@@ -128,14 +128,65 @@ th {
 							<td><c:out value="${item.dateOfArrival1}" /></td>
 							<td><c:out value="${item.arrivalTime1}" /></td>
 							<td><c:out value="${item.price}" /></td>
-							<td><input type="radio" name="radioButton" value="${item.flightID}"> </td> 
+							<td><input type="radio" name="radioButton"
+								value="${item.flightID}"></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			
-			<button type="submit" class="btn btn-default"  name="${item}" > Book</button>
-			
+
+			<!-- For Roundtrip	 -->
+
+			<br>
+
+			<div class="container" style="text-align: center">
+				<span class="label label-success" style="font-size: 30px;">${requestScope.destination}</span>
+				<img src="images/flight.png" width="40" height="30"> <img
+					src="images/flight.png" width="40" height="30"> <img
+					src="images/flight.png" width="40" height="30"> <img
+					src="images/flight.png" width="40" height="30"> <span
+					class="label label-success" style="font-size: 30px">${requestScope.source}</span>
+			</div>
+
+			<br> <br>
+
+			<table class="tablesorter table table-bordered table-striped"
+				class="sortable" id="myTable1">
+
+				<thead>
+					<tr>
+						<th class="header">FlightID</th>
+						<th>DateOfDeparture</th>
+						<th>departureTime</th>
+						<th>DateOfArrival</th>
+						<th>arrivalTime</th>
+						<th>Price</th>
+						<th>Select</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${requestScope.flightList}" var="item">
+						<tr>
+							<td><c:out value="${item.flightID}" /></td>
+							<td><c:out value="${item.dateOfDeparture2}" /></td>
+							<td><c:out value="${item.departureTime2}" /></td>
+							<td><c:out value="${item.dateOfArrival2}" /></td> 
+							<td><c:out value="${item.arrivalTime2}" /></td>
+							<td><c:out value="${item.price}" /></td>
+							<td><input type="radio" name="radioButton"
+								value="${item.flightID}"></td>
+
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+
+
+
+
+			<button type="submit" class="btn btn-default" name="${item}"
+				formaction="confirmFlight.jsp">Book</button>
+
 		</form>
 	</div>
 

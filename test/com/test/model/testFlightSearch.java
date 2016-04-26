@@ -1,4 +1,4 @@
-package com.ssdi.TestCases;
+package com.test.model;
 
 import org.junit.After;
 import org.junit.Before;
@@ -29,6 +29,6 @@ public class testFlightSearch {
 
 	@Test
 	public void test(){
-		serviceDao.searchFlights("nyc", "maa", "2016-04-30", "", 2);
+		//serviceDao.searchFlights("nyc", "maa", "2016-04-30", "", 2);
 	}
 }

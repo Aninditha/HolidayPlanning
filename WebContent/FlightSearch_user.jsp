@@ -231,7 +231,7 @@ body {
 					<label class="control-label col-sm-3" for="usr">Capacity:</label>
 					<div class="col-sm-6">
 						<input type="number" class="form-control" id="usr" required
-							name="source" placeholder="Enter number of people travelling"
+							name="capacity" placeholder="Enter number of people travelling"
 							min="1" / max="10" />
 					</div>
 				</div>

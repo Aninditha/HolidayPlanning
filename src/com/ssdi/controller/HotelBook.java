@@ -2,6 +2,7 @@ package com.ssdi.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -76,10 +77,15 @@ public class HotelBook extends HttpServlet {
 			cost.setPrice(finalCost);
 
 			int status = serviceDao.bookHotel(user, cost);
-			if(status == 1){
-				
-			} else if(status == 2){
-				
+			
+			if (request.getSession().getAttribute("username") != null){
+				if(status == 1){
+					RequestDispatcher rd = request.getRequestDispatcher("/hotelBookSuccess.jsp");
+					rd.forward(request, response);
+				} else if(status == 2){
+					RequestDispatcher rd = request.getRequestDispatcher("/hotelBookFail.jsp");
+					rd.forward(request, response);
+				}
 			}
 		} catch (Exception e) {
 			System.out.println(e);

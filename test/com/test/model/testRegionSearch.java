@@ -1,4 +1,4 @@
-package com.ssdi.TestCases;
+package com.test.model;
 
 import static org.junit.Assert.*;
 

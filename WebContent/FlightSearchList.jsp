@@ -107,8 +107,6 @@ $(document).ready(function() {
 			<thead>
 				<tr>
 					<th class="header">FlightID</th>
-<!-- 					<th>source</th>
-					<th>destination</th> -->
 					<th>DateOfDeparture</th>
 					<th>departureTime</th>
 					<th>DateOfArrival</th>
@@ -119,14 +117,12 @@ $(document).ready(function() {
 			<tbody>
 				<c:forEach items="${requestScope.flightList}" var="item">
 					<tr>
-						 <td><c:out value="${item.flightID}" /></td> 
-						<%-- <td><c:out value="${item.source}" /></td>
-						<td><c:out value="${item.destination}" /></td> --%>
-						<td><c:out value="${item.dateOfDeparture}" /></td>
-						<td><c:out value="${item.departureTime}" /></td>
-						<td><c:out value="${item.dateOfArrival}" /></td>
-						<td><c:out value="${item.arrivalTime}" /></td>
-						<td><c:out value="${item.price}" /></td>
+						<td><c:out value="${item.flightID}" /></td>
+							<td><c:out value="${item.dateOfDeparture1}" /></td>
+							<td><c:out value="${item.departureTime1}" /></td>
+							<td><c:out value="${item.dateOfArrival1}" /></td> 
+							<td><c:out value="${item.arrivalTime1}" /></td>
+							<td><c:out value="${item.price}" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>

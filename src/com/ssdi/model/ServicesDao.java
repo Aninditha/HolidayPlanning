@@ -203,16 +203,11 @@ public class ServicesDao {
 		return exist;
 	}
 
-	public List<flightBean> searchFlights(String source, String destination, String startDate, String endDate,
-			int capacity) {
+	public List<flightBean> searchFlights(String source, String destination, String startDate,
+			String endDate, int capacity, boolean roundtrip) {
 
-		Map<String, ArrayList<String>> hm = ConnectFlightAPI.flightAPI(source, destination, startDate, endDate,
-				capacity);
-
-		for (Entry<String, ArrayList<String>> entry : hm.entrySet()) {
-			System.out.println("Inside model flight");
-			System.out.println("key:" + entry.getKey() + "Value of array list = " + entry.getValue());
-		}
+		Map<String, ArrayList<String>> hm = ConnectFlightAPI.flightAPI(source, destination, startDate, endDate, capacity, roundtrip);
+		
 
 		ArrayList<flightBean> flight = new ArrayList<flightBean>();
 		flightBean flightData;
@@ -222,16 +217,45 @@ public class ServicesDao {
 			flightData = new flightBean();
 			List<String> list = new ArrayList<String>();
 			list = entry.getValue();
-
+			
+		/*	
+			flightArray.add(Source1);
+			flightArray.add(Destination1);
+			flightArray.add(departureTime);
+			flightArray.add(arrivalTime);
+			flightArray.add(DepatureDate);
+			flightArray.add(arrivalDate);*/
+			
+			
+		/*	 flightArray.add(Source2); 
+			 * flightArray.add(Destination2);
+			 * flightArray.add(departureTime2);
+			 * flightArray.add(arrivalTime2);
+			 * flightArray.add(DepatureDate2);
+			 * flightArray.add(arrivalDate2);
+			 */
+			
 			flightData.setFlightID(entry.getKey());
-			flightData.setSource(list.get(0));
-			flightData.setDestination(list.get(1));
-			flightData.setDepartureTime(list.get(2));
-			flightData.setArrivalTime(list.get(3));
-			flightData.setPrice(list.get(4));
-			flightData.setDateOfDeparture(list.get(5));
-			flightData.setDateOfArrival(list.get(6));
-
+			flightData.setSource1(list.get(0));
+			flightData.setDestination1(list.get(1));
+			flightData.setDepartureTime1(list.get(2));
+			flightData.setArrivalTime1(list.get(3));
+			flightData.setDateOfDeparture1(list.get(4));
+			flightData.setDateOfArrival1(list.get(5));
+			
+			flightData.setPrice(list.get(6));
+			
+			if(roundtrip == true)
+			{
+				flightData.setSource2(list.get(7));
+				flightData.setDestination2(list.get(8));
+				flightData.setDepartureTime2(list.get(9));
+				flightData.setArrivalTime2(list.get(10));
+				flightData.setDateOfDeparture2(list.get(11));
+				flightData.setDateOfArrival2(list.get(12));	
+				
+			}
+				
 			flight.add(flightData);
 		}
 		return flight;
@@ -427,7 +451,7 @@ public class ServicesDao {
 		Random rand = new Random();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		bookingID = rand.nextInt() * -1;
+		bookingID = rand.nextInt();
 		String today = dateFormat.format(date);
 		String b1 = ""+bookingID;
 		

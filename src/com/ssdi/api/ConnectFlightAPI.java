@@ -20,14 +20,15 @@ public class ConnectFlightAPI {
 	
 	
 	public static Map<String, ArrayList<String>> flightAPI(String source, String destination1, String startDate,
-			String endDate, int capacity) {
+			String endDate, int capacity, boolean roundtrip) {
 
-		// TODO Auto-generated method stub
 
 		String origin = source;
 		String destination = destination1;
 		String travelDate = startDate;
-		//String travelDateReturn = endDate;
+		
+		
+		String travelDateReturn = endDate;
 		
 		
 		JSONObject jsonObjectResponse = null;
@@ -40,29 +41,33 @@ public class ConnectFlightAPI {
 			JSONObject requestObject = new JSONObject();
 			JSONObject passengersObject = new JSONObject();
 			JSONObject sliceZeroObject = new JSONObject();
-			//JSONObject sliceOneObject = new JSONObject();
+			JSONObject sliceOneObject = new JSONObject();
 			sliceZeroObject.put("origin", origin);
 			sliceZeroObject.put("destination", destination);
 			sliceZeroObject.put("date", travelDate);
-
-			/*sliceOneObject.put("origin", destination);
-			sliceOneObject.put("destination", origin);
-			sliceOneObject.put("date", travelDateReturn);*/
 			
 			JSONArray sliceArray = new JSONArray();
 			sliceArray.put(sliceZeroObject);
 			
-			//sliceArray.put(sliceOneObject);
+			if(roundtrip == true)
+			{
+				sliceOneObject.put("origin", destination);
+				sliceOneObject.put("destination", origin);
+				sliceOneObject.put("date", travelDateReturn);	
+				
+				sliceArray.put(sliceOneObject);
+			}
+			
 			requestObject.put("slice", sliceArray);
 			passengersObject.put("adultCount", adultCount);
 
 			requestObject.put("passengers", passengersObject);
-			requestObject.put("solutions", 10);
+			requestObject.put("solutions", 20);
 			requestObject.put("refundable", true);
 			jsonObject.put("request", requestObject);
 
 			URL url = new URL(
-					"https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyBNTrglqD9t5YAtn7AOKjH2Uav_6P4s6Rk");
+					"https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyAJPNclO1mkYqESFZvlcxbgEpg9N7lByFk");
 			HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 			con.setRequestMethod("POST");
 			con.setDoOutput(true);
@@ -91,7 +96,7 @@ public class ConnectFlightAPI {
 			e.printStackTrace();
 		}
 
-		return flightDetails.JsonToMAp(jsonObjectResponse);
+		return flightDetails.JsonToMAp(jsonObjectResponse,roundtrip);
 
 	}
 }
