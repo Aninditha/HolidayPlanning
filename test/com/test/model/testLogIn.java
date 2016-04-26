@@ -40,34 +40,12 @@ public class testLogIn {
 		
 		IConnectionData connectionData = new TestConnection();
 		Connection testConnection = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
-		userbean user= new userbean();
 		
-		user.setUsername("ssdiproject10");
-		user.setEmail("project10@ssdi.com");
-		user.setPassword("Qwerty123");
-		String selectSql = "select * from customerdetails where username = 'project10@ssdi.com' "
-				+ "and password = 'Qwerty123'";
+		String email = "project10@ssdi.com";
+		String Password = "Qwerty123";
 		
 		testConnection = ConnectionUtil.getConnection(connectionData);
 		
-		serviceDao.registerUser(user);
-		
-		/* Invoke function under test */
-		assertTrue(serviceDao.logIn("project10@ssdi.com","Qwerty123"));
-
-		/* Verify that database was correctly fetched */ 
-		try {
-			statement = testConnection.createStatement();
-			resultSet = statement.executeQuery(selectSql);
-			
-			resultSet.next();
-			assertEquals(resultSet.getString("Email"), "project10@ssdi.com");
-			assertEquals(resultSet.getString("password"), "Qwerty123");
-			
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+		assertTrue(serviceDao.logIn(email,Password));
 	}
 }

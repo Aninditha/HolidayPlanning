@@ -4,22 +4,20 @@ import static org.junit.Assert.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.ssdi.POJO.hotelBean;
+import com.ssdi.POJO.userbean;
 import com.ssdi.model.ServicesDao;
 import com.ssdi.model.databaseFactory;
 import com.ssdi.util.ConnectionUtil;
 import com.ssdi.util.IConnectionData;
 import com.ssdi.util.TestConnection;
 
-public class testHotelSearch {
+public class testRegisterUser {
 
 	private static databaseFactory factory;
 	private ServicesDao serviceDao;
@@ -39,32 +37,23 @@ public class testHotelSearch {
 	}
 
 	@Test
-	public void test() throws SQLException {
+	public void testRegisterlogin() throws SQLException {
 		
 		IConnectionData connectionData = new TestConnection();
 		Connection testConnection = null;
-		Statement statement = null;
-		String insertSql = null;
+
+		userbean user= new userbean();
 		
-		insertSql = "insert into hotel values ('r1', 'h1', 'taj', 'this is a 5 star hotel', 5.0);";
+		user.setUsername("ssdiproject10");
+		user.setEmail("project10@ssdi.com");
+		user.setPassword("Qwerty123");
 		
-		/* Invoke function under test */
-		try {
-			testConnection = ConnectionUtil.getConnection(connectionData);
-			
-			statement = testConnection.createStatement();
-		    statement.executeUpdate(insertSql);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		testConnection = ConnectionUtil.getConnection(connectionData);
 		
-		/* Invoke function under test */
-		hotelBean hotel= new hotelBean();
-		hotel.setRegion("delhi");
-		ArrayList<hotelBean> hotelList = serviceDao.searchHotels(hotel);
+		user = serviceDao.registerUser(user);
 		
-		hotel = hotelList.get(0);
-		assertEquals(hotel.getHotelName(), "taj");
-		assertEquals(hotel.getDescription(), "this is a 5 star hotel");
+		assertEquals(user.getUsername(), "ssdiproject10");
+		assertEquals(user.getPassword(), "Qwerty123");
+		assertEquals(user.getEmail(), "project10@ssdi.com");
 	}
 }

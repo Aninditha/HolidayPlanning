@@ -71,7 +71,7 @@
     <servlet-name>hotelCostCalculation</servlet-name>
     <url-pattern>/hotelCostCalculation</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>HotelBook</servlet-name>
     <servlet-class>com.ssdi.controller.HotelBook</servlet-class>
   </servlet>
@@ -79,4 +79,20 @@
     <servlet-name>HotelBook</servlet-name>
     <url-pattern>/HotelBook</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>FlightOnewayDetails</servlet-name>
+    <servlet-class>com.ssdi.controller.FlightOnewayDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FlightOnewayDetails</servlet-name>
+    <url-pattern>/FlightOnewayDetails</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LoyalityPoints</servlet-name>
+    <servlet-class>com.ssdi.controller.LoyalityPoints</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoyalityPoints</servlet-name>
+    <url-pattern>/LoyalityPoints</url-pattern>
+  </servlet-mapping>  
 </web-app>

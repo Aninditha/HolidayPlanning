@@ -24,7 +24,6 @@
 <link rel="stylesheet" type="text/css"
 	href="css/bootstrap-theme.min.css">
 
-
 <script>
 	$("#myTable").tablesorter();
 
@@ -79,66 +78,59 @@ th {
 	color: white;
 }
 </style>
-
-
 </head>
+
 <body>
 	<%@include file="user_header.jsp"%>
 	<div class="container">
-
-		<form name="temp" action="confirmFlight.jsp" method="POST">
-
-
+		<form name="temp" action="FlightOnewayDetails?dateOfDeparture1=${item.dateOfDeparture1}" method="POST">
 			<h2 style="text-align: center">List of Flights</h2>
 			<br>
-
 			<div class="container" style="text-align: center">
-				<span class="label label-success" style="font-size: 30px;">${requestScope.source}</span>
+				<span class="label label-success" style="font-size: 30px;" name = "source">${requestScope.source}</span>
 				<img src="images/flight.png" width="40" height="30"> <img
 					src="images/flight.png" width="40" height="30"> <img
 					src="images/flight.png" width="40" height="30"> <img
 					src="images/flight.png" width="40" height="30"> <span
 					class="label label-success" style="font-size: 30px">${requestScope.destination}</span>
 			</div>
-
 			<br> <br>
-
 			<table class="tablesorter table table-bordered table-striped"
 				class="sortable" id="myTable">
-
 				<thead>
 					<tr>
+						<th>Select</th>
 						<th class="header">FlightID</th>
-						<!-- 					<th>source</th>
-					<th>destination</th> -->
 						<th>DateOfDeparture</th>
 						<th>departureTime</th>
 						<th>DateOfArrival</th>
 						<th>arrivalTime</th>
 						<th>Price</th>
-						<th>Select</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${requestScope.flightList}" var="item">
 						<tr>
+							<td><input type="radio" name="radioButton"
+								value="${item.flightID}"></td>
 							<td><c:out value="${item.flightID}" /></td>
 							<td><c:out value="${item.dateOfDeparture1}" /></td>
 							<td><c:out value="${item.departureTime1}" /></td>
 							<td><c:out value="${item.dateOfArrival1}" /></td>
 							<td><c:out value="${item.arrivalTime1}" /></td>
 							<td><c:out value="${item.price}" /></td>
-							<td><input type="radio" name="radioButton" value="${item.flightID}"> </td> 
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			
-			<button type="submit" class="btn btn-default"  name="${item}" > Book</button>
-			
+			<br>
+			<center>
+				<button type="submit" class="btn btn-default" name="${item}">
+					Book</button>
+			</center>
+			<br>
 		</form>
 	</div>
-
-
+	<%@include file="footer.jsp"%>
 </body>
 </html>

@@ -50,15 +50,12 @@ body {
 				<div class="form-group">
 					<label for="subscription" for="region">Location: </label>
 					<input
-						required type="text" class="form-control" name="region" id="subscription"
+						required type="text" class="form-control" name="regionName" id="subscription"
 						placeholder="Enter a city">
 				</div>
 				<button type="submit" class="btn btn-default">Search</button>
 			</form>
 		</div>
-		<!-- end Container-->
-
-		<!-- end well-->
 	</section>
 	<!-- Call to action -->
 	<%@include file="footer.jsp"%>

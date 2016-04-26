@@ -3,15 +3,15 @@ package com.test.model;
 import static org.junit.Assert.*;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.ssdi.POJO.taBean;
 import com.ssdi.model.ServicesDao;
 import com.ssdi.model.databaseFactory;
 import com.ssdi.util.ConnectionUtil;
@@ -22,12 +22,12 @@ public class testRegionSearch {
 
 	private static databaseFactory factory;
 	private ServicesDao serviceDao;
-	
+
 	@BeforeClass
 	public static void myInitialization() throws Exception {
 		factory = databaseFactory.getInstance("test");
 	}
-	
+
 	@Before
 	public void setUp() throws Exception {
 		serviceDao = factory.createServiceDao();
@@ -38,36 +38,29 @@ public class testRegionSearch {
 	}
 
 	@Test
-	public void test(){
+	public void test() {
+
 		IConnectionData connectionData = new TestConnection();
 		Connection testConnection = null;
 		Statement statement = null;
-		ResultSet resultSet = null;
-		String selectSql = "select * from attractions where region_ID = 'r1';";
-		String insertAttractions = "insert into attractions values('r1', 'a1', 'Red Fort', 'This is the residence of mughal emperor');";
-		
+		String insertAttractions = "insert into attractions values('r1', 'a1', 'Red Fort', "
+				+ "'This is the residence of mughal emperor');";
+
 		/* Invoke function under test */
 		try {
 			testConnection = ConnectionUtil.getConnection(connectionData);
-			
+
 			statement = testConnection.createStatement();
-		    statement.executeUpdate(insertAttractions);
+			statement.executeUpdate(insertAttractions);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		/* Invoke function under test */
-		serviceDao.searchRegions("India");
-		
-		/* Verify that database was correctly fetched */ 
-		try {
-			statement = testConnection.createStatement();
-			resultSet = statement.executeQuery(selectSql);
-			
-			resultSet.next();
-			assertEquals(resultSet.getString("region_ID"), "r1");
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+		ArrayList<taBean> attractionsList = serviceDao.searchAttractions("Delhi");
+
+		taBean ta = attractionsList.get(0);
+		assertEquals(ta.getAttractionName(), "Red Fort");
+		assertEquals(ta.getDescription(), "This is the residence of mughal emperor");
 	}
 }

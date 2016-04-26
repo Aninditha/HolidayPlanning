@@ -3,11 +3,8 @@ package com.test.model;
 import static org.junit.Assert.*;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.junit.After;
 import org.junit.Before;
@@ -46,7 +43,6 @@ public class testCountrySearch {
 		IConnectionData connectionData = new TestConnection();
 		Connection testConnection = null;
 		Statement statement = null;
-		ResultSet resultSet = null;
 
 		String insertCountry = "insert into country values ('c1', 'India');";
 		String insertRegion = "insert into region values ('c1', 'r1', 'Delhi', 'This is the capital of India');";

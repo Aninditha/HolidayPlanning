@@ -70,7 +70,7 @@ public class HotelSearch extends HttpServlet {
 		boolean Exist = false;
 		try {
 			hotelBean region = new hotelBean();
-			region.setRegion(request.getParameter("region"));
+			region.setRegion(request.getParameter("regionName"));
 			String place = region.getRegion();
 			Exist = serviceDao.checkHotelRegion(place);
 			hotelList = serviceDao.searchHotels(region);

@@ -71,8 +71,6 @@
 
 <body>
 	<div class="container">
-
-
 		<table class="tablesorter table table-bordered table-striped"
 			class="sortable" id="myTable">
 
@@ -99,6 +97,5 @@
 			</tbody>
 		</table>
 	</div>
-
 </body>
 </html>

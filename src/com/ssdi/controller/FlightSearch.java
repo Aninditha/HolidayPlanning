@@ -22,95 +22,88 @@ import com.ssdi.model.databaseFactory;
 @WebServlet("/FlightSearch")
 
 public class FlightSearch extends HttpServlet {
-	
+
 	static List<flightBean> flightList = new ArrayList<>();
 	private ServicesDao serviceDao;
-	
+
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FlightSearch() {
-        super();
-    }
-    
-    public void init(ServletConfig config) throws ServletException {
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public FlightSearch() {
+		super();
+	}
+
+	public void init(ServletConfig config) throws ServletException {
 
 		super.init(config);
 		ServletContext context = getServletContext();
 		databaseFactory factory = databaseFactory.getInstance(context.getInitParameter("environment"));
 		serviceDao = factory.createServiceDao();
 	}
-    
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		 boolean roundtrip;
-		
-		
-		 	String source = request.getParameter("source");
-		    String destination = request.getParameter("destination");
-		    String startDate = request.getParameter("startDate");
-		    
-		    String endDate = request.getParameter("endDate");
-		    
-		   
-			if(endDate == null)
-		    	roundtrip = false;
-		    else
-		    	roundtrip = true;
-		 
-		 
-		 try{				    
-		    
-		    
-		    int capacity = Integer.parseInt(request.getParameter("capacity"));
-		    
-		    flightList = serviceDao.searchFlights(source, destination, startDate, endDate, capacity, roundtrip);
-		    
-		} catch(Exception e){
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		boolean roundtrip;
+
+		String source = request.getParameter("source");
+		String destination = request.getParameter("destination");
+		String startDate = request.getParameter("startDate");
+
+		String endDate = request.getParameter("endDate");
+
+		if (endDate == null)
+			roundtrip = false;
+		else
+			roundtrip = true;
+
+		try {
+
+			int capacity = Integer.parseInt(request.getParameter("capacity"));
+
+			flightList = serviceDao.searchFlights(source, destination, startDate, endDate, capacity, roundtrip);
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		request.setAttribute("source",request.getParameter("source") );
-		request.setAttribute("destination",request.getParameter("destination") );
-		request.setAttribute("flightList",flightList);
-		
-		
-		if(roundtrip == false)
-		{
-		if (request.getSession().getAttribute("username") != null){
-			RequestDispatcher rd = request.getRequestDispatcher("/FlightSearchList_user.jsp");
-			rd.forward(request,response);
-		}
-		else{
-			RequestDispatcher rd = request.getRequestDispatcher("/FlightSearchList.jsp");
-			rd.forward(request,response);
+
+		request.setAttribute("source", request.getParameter("source"));
+		request.setAttribute("destination", request.getParameter("destination"));
+		request.setAttribute("flightList", flightList);
+
+		if (roundtrip == false) {
+			if (request.getSession().getAttribute("username") != null) {
+				RequestDispatcher rd = request.getRequestDispatcher("/FlightSearchList_user.jsp");
+				rd.forward(request, response);
+			} else {
+				RequestDispatcher rd = request.getRequestDispatcher("/FlightSearchList.jsp");
+				rd.forward(request, response);
 			}
-		}
-		else
-		{
-			if (request.getSession().getAttribute("username") != null){
+		} else {
+			if (request.getSession().getAttribute("username") != null) {
 				RequestDispatcher rd = request.getRequestDispatcher("/FlightSearchList_user_roundtrip.jsp");
-				rd.forward(request,response);
-			}
-			else{
+				rd.forward(request, response);
+			} else {
 				RequestDispatcher rd = request.getRequestDispatcher("/FlightSearchList_roundtrip.jsp");
-				rd.forward(request,response);
+				rd.forward(request, response);
 			}
-			
 		}
 	}
 }
