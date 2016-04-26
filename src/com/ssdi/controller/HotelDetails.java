@@ -2,8 +2,8 @@ package com.ssdi.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -19,22 +19,18 @@ import com.ssdi.model.ServicesDao;
 import com.ssdi.model.databaseFactory;
 
 /**
- * Servlet implementation class HotelSearch
+ * Servlet implementation class HotelDetails
  */
+@WebServlet("/HotelDetails")
+public class HotelDetails extends HttpServlet {
 
-@WebServlet("/HotelSearch")
-
-public class HotelSearch extends HttpServlet {
-
-	static List<hotelBean> hotelList = new ArrayList<>();
 	private static final long serialVersionUID = 1L;
 	private ServicesDao serviceDao;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-
-	public HotelSearch() {
+	public HotelDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -51,7 +47,6 @@ public class HotelSearch extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -62,43 +57,28 @@ public class HotelSearch extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		String regionID;
-		boolean Exist = false;
+		hotelBean hotel = new hotelBean();
 		try {
-			hotelBean region = new hotelBean();
-			region.setRegion(request.getParameter("region"));
-			String place = region.getRegion();
-			Exist = serviceDao.checkHotelRegion(place);
-			hotelList = serviceDao.searchHotels(region);
+			HttpSession Session = request.getSession();
+			String regionID = Session.getAttribute("regionID").toString();
 
-			Iterator iter = hotelList.iterator();
-			hotelBean temp = (hotelBean) iter.next();
-			regionID = temp.getRegionID();
+			hotel.setHotelName(request.getParameter("hotelName"));
+			String hotelName = hotel.getHotelName();
+			hotel = serviceDao.searchHotelDetails(hotelName, regionID);
+			
+			String hotelsource = hotel.getHotelName();
+			request.setAttribute("source", hotelsource);
+			request.setAttribute("description", hotel.getDescription());
+			request.setAttribute("roomPrice", hotel.getRoomPrice());
 
-			if (Exist) {
-				HttpSession Session = request.getSession();
-				Session.setAttribute("regionID", regionID);
-
-				request.setAttribute("hotelList", hotelList);
-				if (request.getSession().getAttribute("username") != null) {
-					RequestDispatcher rd = request.getRequestDispatcher("/HotelSearchList_user.jsp");
-					rd.forward(request, response);
-				} else {
-					RequestDispatcher rd = request.getRequestDispatcher("/HotelSearchList.jsp");
-					rd.forward(request, response);
-				}
+			if (request.getSession().getAttribute("username") != null) {
+				RequestDispatcher rd = request.getRequestDispatcher("/HotelDetails_user.jsp");
+				rd.forward(request, response);
 			} else {
-				if (request.getSession().getAttribute("username") != null) {
-					RequestDispatcher rd = request.getRequestDispatcher("/hotelError_user.jsp");
-					rd.forward(request, response);
-				} else {
-					RequestDispatcher rd = request.getRequestDispatcher("/hotelError.jsp");
-					rd.forward(request, response);
-				}
+				RequestDispatcher rd = request.getRequestDispatcher("/HotelDetails.jsp");
+				rd.forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

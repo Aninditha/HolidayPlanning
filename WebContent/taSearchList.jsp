@@ -81,19 +81,25 @@
 					<th class="header">Attractions</th>
 					<th>Description</th>
 					<th>Details</th>
+					<th>Hotels</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${requestScope.taList}" var="item">
-					<form action="TARegionSearch?regionName=${item.regionName}"
-						method="POST">
-						<tr>
-							<td><c:out value="${item.regionName}" /></td>
-							<td><c:out value="${item.description}" /></td>
-							<td><button type="submit" class="btn btn-default">view>></button>
-							</td>
-						</tr>
-					</form>
+					<tr>
+						<td><c:out value="${item.regionName}" /></td>
+						<td><c:out value="${item.description}" /></td>
+						<td><form
+								action="TARegionSearch?regionName=${item.regionName}"
+								method="POST">
+								<button type="submit" class="btn btn-default">view>></button>
+							</form>
+						<td><form action="HotelSearch?regionName=${item.regionName}"
+								method="POST">
+								<button type="submit" class="btn btn-default">Hotels>></button>
+							</form></td>
+					</tr>
+
 				</c:forEach>
 			</tbody>
 		</table>

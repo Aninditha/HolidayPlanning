@@ -13,12 +13,13 @@
 
 <title>Holiday Planning</title>
 
-<%@include file="Header.jsp" %>
+<%@include file="Header.jsp"%>
 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
-    <script type="text/javascript" src="jquery-1.12.2.min.js"></script>
-   
-<script type="text/javascript" src="jquery.tablesorter.js"></script> 
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+<script type="text/javascript" src="jquery-1.12.2.min.js"></script>
+
+<script type="text/javascript" src="jquery.tablesorter.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
@@ -26,43 +27,42 @@
 	href="css/bootstrap-theme.min.css">
 
 
-<script >
+<script>
+	$("#myTable").tablesorter();
 
-
-$("#myTable").tablesorter(); 
-
-$(document).ready(function() { 
-    $("table").tablesorter({ 
-        // pass the headers argument and assing a object 
-        headers: { 
-            // assign the secound column (we start counting zero) 
-            0: { 
-                // disable it by setting the property sorter to false 
-                sorter: false 
-            }, 
-            // assign the third column (we start counting zero) 
-            1: { 
-                // disable it by setting the property sorter to false 
-                sorter: false 
-            },
-            4: { 
-                // disable it by setting the property sorter to false 
-                sorter: false 
-            },
-            5: { 
-                // disable it by setting the property sorter to false 
-                sorter: false 
-            }
-        } 
-    }); 
-});
-
- 
-
+	$(document).ready(function() {
+		$("table").tablesorter({
+			// pass the headers argument and assing a object 
+			headers : {
+				// assign the secound column (we start counting zero) 
+				0 : {
+					// disable it by setting the property sorter to false 
+					sorter : false
+				},
+				// assign the third column (we start counting zero) 
+				1 : {
+					// disable it by setting the property sorter to false 
+					sorter : false
+				},
+				4 : {
+					// disable it by setting the property sorter to false 
+					sorter : false
+				},
+				5 : {
+					// disable it by setting the property sorter to false 
+					sorter : false
+				}
+			}
+		});
+	});
 </script>
 
-<script src="jquery.tablesorter.js"> </script>
-<script> $('myTable').tablesorter(); </script>
+<script src="jquery.tablesorter.js">
+	
+</script>
+<script>
+	$('myTable').tablesorter();
+</script>
 
 <link href="css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="css/center-block.css">
@@ -70,36 +70,35 @@ $(document).ready(function() {
 </head>
 
 <body>
-<div class="container">
+	<div class="container">
 
 
- <table class="tablesorter table table-bordered table-striped"  class="sortable" id="myTable"> 
+		<table class="tablesorter table table-bordered table-striped"
+			class="sortable" id="myTable">
 
-<thead> 
-      <tr>
-        <th class="header">  Name </th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Rating</th>
-        <th>Type Of Room</th>
-        <th>Vacancies </th>
-      </tr>
-       </thead>
-<tbody>
-  <c:forEach items="${requestScope.hotelList}" var="item"> 	
-     <tr >
-      
-      <td><c:out value="${item.hotelName}" /></td> 
-  	  <td><c:out value="${item.description}" /></td> 
-  	  <td><c:out value="${item.price}" /> </td> 
-  	  <td><c:out value="${item.rating}" /></td> 
-  	  <td><c:out value="${item.typeOfRoom}" /></td> 
-  	  <td><c:out value="${item.numberOfVacancies}" /></td>
-  	  </tr>
-   </c:forEach>
-   </tbody>
-</table>
-</div>
+			<thead>
+				<tr>
+					<th class="header">Hotel Name</th>
+					<th>Description</th>
+					<th>Rating</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${requestScope.hotelList}" var="item">
+					<form action="HotelDetails?hotelName=${item.hotelName}"
+						method="POST">
+						<tr>
+							<td><c:out value="${item.hotelName}" /></td>
+							<td><c:out value="${item.description}" /></td>
+							<td><c:out value="${item.rating}" /></td>
+							<td><button type="submit" class="btn btn-default">view>></button></td>
+						</tr>
+					</form>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 
 </body>
 </html>

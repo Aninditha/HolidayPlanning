@@ -13,7 +13,7 @@
 
 <title>Holiday Planning</title>
 
-<%@include file="user_header.jsp"%>
+<%@include file="Header.jsp"%>
 
 <script
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
@@ -78,27 +78,25 @@
 
 			<thead>
 				<tr>
-					<th class="header">Hotel Name</th>
+					<th class="header">Attractions</th>
 					<th>Description</th>
-					<th>Rating</th>
 					<th>Details</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${requestScope.hotelList}" var="item">
-					<form action="HotelDetails?hotelName=${item.hotelName}"
+				<c:forEach items="${requestScope.taList}" var="item">
+					<form action="TARegionSearch?regionName=${item.regionName}"
 						method="POST">
 						<tr>
-							<td><c:out value="${item.hotelName}" /></td>
+							<td><c:out value="${item.regionName}" /></td>
 							<td><c:out value="${item.description}" /></td>
-							<td><c:out value="${item.rating}" /></td>
-							<td><button type="submit" class="btn btn-default">view>></button></td>
+							<td><button type="submit" class="btn btn-default">view>></button>
+							</td>
 						</tr>
 					</form>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
-
 </body>
 </html>
