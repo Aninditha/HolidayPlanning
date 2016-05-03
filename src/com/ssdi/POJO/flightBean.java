@@ -18,6 +18,14 @@ public class flightBean {
 	private String DateOfDeparture2;
 	private String DateOfArrival2;
 	
+	private boolean roundtrip;
+	
+	public boolean isRoundtrip() {
+		return roundtrip;
+	}
+	public void setRoundtrip(boolean roundtrip) {
+		this.roundtrip = roundtrip;
+	}
 	private String startDate;
 	private String endDate;
 	private String FlightID;

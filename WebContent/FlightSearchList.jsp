@@ -115,16 +115,21 @@ $(document).ready(function() {
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${requestScope.flightList}" var="item">
-					<tr>
-						<td><c:out value="${item.flightID}" /></td>
+				<c:forEach items="${requestScope.flightList}" var="fmap">
+						<tr>
+							<td><c:out value="${fmap.key}" /></td>
+								
+							<c:forEach var="item" items="${requestScope.FlightArrayList}" begin="0" end="0">
+							
 							<td><c:out value="${item.dateOfDeparture1}" /></td>
 							<td><c:out value="${item.departureTime1}" /></td>
 							<td><c:out value="${item.dateOfArrival1}" /></td> 
 							<td><c:out value="${item.arrivalTime1}" /></td>
 							<td><c:out value="${item.price}" /></td>
-					</tr>
-				</c:forEach>
+							
+							</c:forEach>
+						</tr>
+					</c:forEach>
 			</tbody>
 		</table>
 	</div>

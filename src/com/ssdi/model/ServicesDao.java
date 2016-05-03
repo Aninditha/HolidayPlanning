@@ -199,13 +199,15 @@ public class ServicesDao {
 		return exist;
 	}
 
-	public List<flightBean> searchFlights(String source, String destination, String startDate, String endDate,
+	public Map<String, flightBean> searchFlights(String source, String destination, String startDate, String endDate,
 			int capacity, boolean roundtrip) {
 
 		Map<String, ArrayList<String>> hm = ConnectFlightAPI.flightAPI(source, destination, startDate, endDate,
 				capacity, roundtrip);
 
-		ArrayList<flightBean> flight = new ArrayList<flightBean>();
+		Map<String, flightBean> flightDetails1 = new HashMap<String, flightBean>();
+
+		ArrayList<String> flight = new ArrayList<>();
 		flightBean flightData;
 
 		for (Entry<String, ArrayList<String>> entry : hm.entrySet()) {
@@ -224,17 +226,88 @@ public class ServicesDao {
 
 			flightData.setPrice(list.get(6));
 
+			flight.add(flightData.getSource1());
+			flight.add(flightData.getDestination1());
+			flight.add(flightData.getDepartureTime1());
+			flight.add(flightData.getArrivalTime1());
+			flight.add(flightData.getDateOfDeparture1());
+			flight.add(flightData.getDateOfArrival1());
+			flight.add(flightData.getPrice());
+
 			if (roundtrip == true) {
+
+				flightData.setRoundtrip(true);
 				flightData.setSource2(list.get(7));
 				flightData.setDestination2(list.get(8));
 				flightData.setDepartureTime2(list.get(9));
 				flightData.setArrivalTime2(list.get(10));
 				flightData.setDateOfDeparture2(list.get(11));
 				flightData.setDateOfArrival2(list.get(12));
+
+				flight.add(flightData.getSource2());
+				flight.add(flightData.getDestination2());
+				flight.add(flightData.getDepartureTime2());
+				flight.add(flightData.getArrivalTime2());
+				flight.add(flightData.getDateOfDeparture2());
+				flight.add(flightData.getDateOfArrival2());
+
 			}
-			flight.add(flightData);
+
+			flightDetails1.put(flightData.getFlightID(), flightData);
+
 		}
-		return flight;
+		return flightDetails1;
+	}
+
+	public static int BookFlight(flightBean flightdetails) {
+
+		PreparedStatement preparedStmt = null;
+		Connection currentConnection = null;
+
+		// String em = us.getEmail();
+
+		String F_ID = flightdetails.getFlightID();
+
+		String source1 = flightdetails.getSource1();
+		String destination1 = flightdetails.getDestination1();
+		String price = flightdetails.getPrice();
+		String dateofdep1 = flightdetails.getDateOfDeparture1();
+		String dateofArr1 = flightdetails.getDateOfArrival1();
+		String depTime1 = flightdetails.getDepartureTime1();
+		String arrTime1 = flightdetails.getArrivalTime2();
+
+		if (flightdetails.isRoundtrip()) {
+
+			// query for roundtrip insert...
+
+		}
+
+		// CHANGE THE QUERY TO FLIGHT BOOKING....
+
+		String Query = "insert into flightbookings (hotelBooking_ID, user_ID, hotelName, numberOfRooms, numberOfNights,"
+				+ "typeOfRooms, hotelTotalCost, dateOfBooking) values (?, ?, ?, ?, ?, ?, ?, ?)";
+
+		try {
+			// connect to DB
+			currentConnection = ConnectionUtil.getConnection(connectionData);
+
+			// create the mysql insert preparedstatement
+			preparedStmt = currentConnection.prepareStatement(Query);
+			/*
+			 * preparedStmt.setString(1, b1); preparedStmt.setString(2, em);
+			 * preparedStmt.setString(3, hn);
+			 * 
+			 * // execute the preparedstatement status =
+			 * preparedStmt.executeUpdate();
+			 */
+			currentConnection.close();
+			return 1;
+		} catch (Exception ex) {
+			System.out.println("Log In failed: An Exception has occurred! " + ex);
+		}
+		// return false;
+		// return status;
+		return 0;
 	}
 
 	public ArrayList<taBean> searchRegions(String location) {
@@ -475,9 +548,9 @@ public class ServicesDao {
 		Statement stmt = null;
 		ResultSet rs = null;
 		int points = 0;
-		
+
 		String Query = "select * from loyaltypoints where user_ID = \"" + username + "\";";
-		
+
 		try {
 			// connect to DB
 			currentConnection = ConnectionUtil.getConnection(connectionData);

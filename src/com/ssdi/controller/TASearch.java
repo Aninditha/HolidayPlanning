@@ -69,8 +69,9 @@ public class TASearch extends HttpServlet {
 		    
 		    if(Exist){
 		    	request.setAttribute("taList",taList);
-
+		    	System.out.println(request.getSession().getAttribute("username"));
 				if (request.getSession().getAttribute("username") != null){
+					System.out.println("jhgf");
 					RequestDispatcher rd = request.getRequestDispatcher("/taSearchList_user.jsp");
 					rd.forward(request,response);
 				}

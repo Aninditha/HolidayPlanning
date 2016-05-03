@@ -114,20 +114,23 @@ th {
 						<th>DateOfArrival</th>
 						<th>arrivalTime</th>
 						<th>Price</th>
-					<!-- 	<th>Select</th> -->
+					
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${requestScope.flightList}" var="item">
+					<c:forEach items="${requestScope.flightList}" var="fmap">
 						<tr>
-								<td><c:out value="${item.flightID}" /></td>
+							<td><c:out value="${fmap.key}" /></td>
+								
+							<c:forEach var="item" items="${requestScope.FlightArrayList}" begin="0" end="0">
+							
 							<td><c:out value="${item.dateOfDeparture1}" /></td>
 							<td><c:out value="${item.departureTime1}" /></td>
 							<td><c:out value="${item.dateOfArrival1}" /></td> 
 							<td><c:out value="${item.arrivalTime1}" /></td>
 							<td><c:out value="${item.price}" /></td>
-						<%-- 	<td><input type="radio" name="radioButton"
-								value="${item.flightID}"></td> --%>
+							
+							</c:forEach>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -163,17 +166,20 @@ th {
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${requestScope.flightList}" var="item">
+			<c:forEach items="${requestScope.flightList}" var="fmap">
 						<tr>
-								<td><c:out value="${item.flightID}" /></td>
-							<td><c:out value="${item.dateOfDeparture2}" /></td>
-							<td><c:out value="${item.departureTime2}" /></td>
-							<td><c:out value="${item.dateOfArrival2}" /></td> 
-							<td><c:out value="${item.arrivalTime2}" /></td>
+							<td><c:out value="${fmap.key}" /></td>
+								
+							<c:forEach var="item" items="${requestScope.FlightArrayList}" begin="0" end="0">
+							
+							<td><c:out value="${item.dateOfDeparture1}" /></td>
+							<td><c:out value="${item.departureTime1}" /></td>
+							<td><c:out value="${item.dateOfArrival1}" /></td> 
+							<td><c:out value="${item.arrivalTime1}" /></td>
 							<td><c:out value="${item.price}" /></td>
-							<%-- <td><input type="radio" name="radioButton"
-								value="${item.flightID}"></td> --%>
-
+							
+							</c:forEach>
+							<td><input type="radio" name="radioButton" value="${fmap.key}"> </td>
 						</tr>
 					</c:forEach>
 				</tbody>

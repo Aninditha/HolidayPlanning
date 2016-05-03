@@ -2,7 +2,11 @@ package com.ssdi.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -23,8 +27,9 @@ import com.ssdi.model.databaseFactory;
 
 public class FlightSearch extends HttpServlet {
 
-	static List<flightBean> flightList = new ArrayList<>();
+	Map<String, flightBean> flightMap = new HashMap<String, flightBean>();;
 	private ServicesDao serviceDao;
+	List<flightBean> FlightArrayList = new ArrayList<flightBean>() ;
 
 	private static final long serialVersionUID = 1L;
 
@@ -60,6 +65,35 @@ public class FlightSearch extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		String flightID = request.getParameter("radioButton");
+		
+		
+		//FlightBooking... calling BookFlight in services DAO.
+		if(flightID != null)
+		{
+			
+			
+			for (Entry<String, flightBean> entry : flightMap.entrySet()) {
+				String key = entry.getKey();
+				
+				
+				if(key.equals(flightID))
+				{
+					
+		
+					System.out.println("Inside flight search later1111");
+					
+					int bookflightstring = ServicesDao.BookFlight(entry.getValue());
+					
+					System.out.println("Inside flight search later2");
+	
+					
+				}
+				
+			}
+		}
+		
 
 		boolean roundtrip;
 
@@ -77,8 +111,18 @@ public class FlightSearch extends HttpServlet {
 		try {
 
 			int capacity = Integer.parseInt(request.getParameter("capacity"));
+		
+			flightMap = serviceDao.searchFlights(source, destination, startDate, endDate, capacity, roundtrip);
 
-			flightList = serviceDao.searchFlights(source, destination, startDate, endDate, capacity, roundtrip);
+			for (Entry<String, flightBean> entry : flightMap.entrySet()) {
+				String key = entry.getKey();
+		
+				FlightArrayList.add(entry.getValue());
+				
+				/*System.out.println(FlightArrayList.toString());*/
+			}
+
+	
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,7 +130,8 @@ public class FlightSearch extends HttpServlet {
 
 		request.setAttribute("source", request.getParameter("source"));
 		request.setAttribute("destination", request.getParameter("destination"));
-		request.setAttribute("flightList", flightList);
+		request.setAttribute("flightList", flightMap);
+		request.setAttribute("FlightArrayList", FlightArrayList);
 
 		if (roundtrip == false) {
 			if (request.getSession().getAttribute("username") != null) {
@@ -104,6 +149,8 @@ public class FlightSearch extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/FlightSearchList_roundtrip.jsp");
 				rd.forward(request, response);
 			}
+
 		}
 	}
+	
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ssdi.POJO.userbean;
 import com.ssdi.model.ServicesDao;
 import com.ssdi.model.databaseFactory;
 
@@ -21,6 +22,7 @@ import com.ssdi.model.databaseFactory;
 public class LoyalityPoints extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ServicesDao serviceDao;
+	int points;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -41,18 +43,19 @@ public class LoyalityPoints extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String username = request.getSession().getAttribute("username").toString();
+		points = serviceDao.LoyalityPoints(username);
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getSession().getAttribute("username").toString();
-		System.out.println(serviceDao.LoyalityPoints(username));
 		
 		if (request.getSession().getAttribute("username") != null) {
+			System.out.println(points+""+request.getSession().getAttribute("username"));
+			request.setAttribute("currentLoyalityPoints", points);
 			RequestDispatcher rd = request.getRequestDispatcher("/loyalty.jsp");
 			rd.forward(request, response);
 		}

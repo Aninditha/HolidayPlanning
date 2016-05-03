@@ -82,7 +82,7 @@
 							name="dateOfDeparture1" required>
 							<option class="form-control"
 								value="${requestScope.dateOfDeparture1}">
-								${requestScope.dateOfDeparture1} rooms</option>
+								${requestScope.dateOfDeparture1} </option>
 						</select>
 					</div>
 				</div>
