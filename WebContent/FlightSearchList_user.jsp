@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <html lang="en">
-
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,8 +21,6 @@
 
 <link rel="stylesheet" type="text/css"
 	href="css/bootstrap-theme.min.css">
-
-
 <script>
 	$("#myTable").tablesorter();
 
@@ -79,8 +75,6 @@ th {
 	color: white;
 }
 </style>
-
-
 </head>
 <body>
 	<%@include file="user_header.jsp"%>
@@ -88,8 +82,6 @@ th {
 
 		<!-- <form name="temp" action="BookFlight" method="POST"> -->
 		<form name="temp" action="FlightSearch" method="POST">
-
-
 			<h2 style="text-align: center">List of Flights</h2>
 			<br>
 
@@ -101,7 +93,6 @@ th {
 					src="images/flight.png" width="40" height="30"> <span
 					class="label label-success" style="font-size: 30px">${requestScope.destination}</span>
 			</div>
-
 			<br> <br>
 
 			<table class="tablesorter table table-bordered table-striped"
@@ -109,40 +100,32 @@ th {
 
 				<thead>
 					<tr>
+						<th>Select</th>
 						<th class="header">FlightID</th>
 						<th>DateOfDeparture</th>
 						<th>departureTime</th>
 						<th>DateOfArrival</th>
 						<th>arrivalTime</th>
 						<th>Price</th>
-						<th>Select</th>
 					</tr>
 				</thead>
 				<tbody>
-
-					<c:forEach var="item" items="${requestScope.FlightArrayList}"
-						>
+					<c:forEach var="item" items="${requestScope.FlightArrayList}">
 						<tr>
+							<td><input type="radio" name="radioButton"
+								value="${item.flightID}"></td>
 							<td><c:out value="${item.flightID}" /></td>
 							<td><c:out value="${item.dateOfDeparture1}" /></td>
 							<td><c:out value="${item.departureTime1}" /></td>
 							<td><c:out value="${item.dateOfArrival1}" /></td>
 							<td><c:out value="${item.arrivalTime1}" /></td>
 							<td><c:out value="${item.price}" /></td>
-
-
-							<td><input type="radio" name="radioButton"
-								value="${item.flightID}"></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-
 			<button type="submit" class="btn btn-default" name="">Book</button>
-
 		</form>
 	</div>
-
-
 </body>
 </html>

@@ -25,11 +25,7 @@
 
 <link rel="stylesheet" type="text/css"
 	href="css/bootstrap-theme.min.css">
-
-
 <script>
-
-
 $("#myTable").tablesorter(); 
 
 $(document).ready(function() { 
@@ -66,8 +62,6 @@ $(document).ready(function() {
     }); 
 });
 
- 
-
 </script>
 
 <script src="jquery.tablesorter.js"> </script>
@@ -76,30 +70,29 @@ $(document).ready(function() {
 <link href="css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="css/center-block.css">
 
-<style> 
-
- th {
-    background-color:  	#A9A9A9;
-    color: white;
-	}
+<style>
+th {
+	background-color: #A9A9A9;
+	color: white;
+}
 </style>
 
 </head>
 <body>
 	<div class="container">
 
-			<h2 style="text-align: center">List of Flights</h2>
-			<br>
-		
-		<div class="container" style="text-align: center" >  
-		<span class="label label-success" style="font-size: 30px; " >${requestScope.source}</span>
-		<img src="images/flight.png" width="40" height="30">
-		<img src="images/flight.png" width="40" height="30">
-		<img src="images/flight.png" width="40" height="30">
-		<img src="images/flight.png" width="40" height="30">
-		<span class="label label-success" style="font-size: 30px">${requestScope.destination}</span>
+		<h2 style="text-align: center">List of Flights</h2>
+		<br>
+
+		<div class="container" style="text-align: center">
+			<span class="label label-success" style="font-size: 30px;">${requestScope.source}</span>
+			<img src="images/flight.png" width="40" height="30"> <img
+				src="images/flight.png" width="40" height="30"> <img
+				src="images/flight.png" width="40" height="30"> <img
+				src="images/flight.png" width="40" height="30"> <span
+				class="label label-success" style="font-size: 30px">${requestScope.destination}</span>
 		</div>
-		
+
 		<br> <br>
 		<table class="tablesorter table table-bordered table-striped"
 			class="sortable" id="myTable">
@@ -116,20 +109,21 @@ $(document).ready(function() {
 			</thead>
 			<tbody>
 				<c:forEach items="${requestScope.flightList}" var="fmap">
-						<tr>
-							<td><c:out value="${fmap.key}" /></td>
-								
-							<c:forEach var="item" items="${requestScope.FlightArrayList}" begin="0" end="0">
-							
+					<tr>
+						<td><c:out value="${fmap.key}" /></td>
+
+						<c:forEach var="item" items="${requestScope.FlightArrayList}"
+							begin="0" end="0">
+
 							<td><c:out value="${item.dateOfDeparture1}" /></td>
 							<td><c:out value="${item.departureTime1}" /></td>
-							<td><c:out value="${item.dateOfArrival1}" /></td> 
+							<td><c:out value="${item.dateOfArrival1}" /></td>
 							<td><c:out value="${item.arrivalTime1}" /></td>
 							<td><c:out value="${item.price}" /></td>
-							
-							</c:forEach>
-						</tr>
-					</c:forEach>
+
+						</c:forEach>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>

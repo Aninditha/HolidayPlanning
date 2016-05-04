@@ -63,6 +63,7 @@ public class ServicesDao {
 		return bean;
 	}
 
+
 	public static boolean checkEmail(String email) {
 
 		boolean exist = false;
@@ -92,6 +93,7 @@ public class ServicesDao {
 		}
 		return exist;
 	}
+
 
 	public boolean logIn(String username, String password) {
 
@@ -123,6 +125,7 @@ public class ServicesDao {
 		}
 		return userExist;
 	}
+
 
 	public ArrayList<hotelBean> searchHotels(hotelBean bean) throws SQLException {
 
@@ -169,6 +172,7 @@ public class ServicesDao {
 		return hotel;
 	}
 
+
 	public boolean checkHotelRegion(String region) {
 		boolean exist = false;
 
@@ -198,6 +202,7 @@ public class ServicesDao {
 		}
 		return exist;
 	}
+
 
 	public Map<String, flightBean> searchFlights(String source, String destination, String startDate, String endDate,
 			int capacity, boolean roundtrip) {
@@ -252,64 +257,114 @@ public class ServicesDao {
 				flight.add(flightData.getDateOfArrival2());
 
 			}
-
 			flightDetails1.put(flightData.getFlightID(), flightData);
-
 		}
 		return flightDetails1;
 	}
 
-	public static int BookFlight(flightBean flightdetails) {
+	public static int BookFlight(String userName, flightBean flightdetails) {
 
+		int status = 2;
+		int bookingID;
+		Random rand = new Random();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		bookingID = rand.nextInt();
+		String today = dateFormat.format(date);
+		String b1 = "" + bookingID;
+		
 		PreparedStatement preparedStmt = null;
 		Connection currentConnection = null;
 
-		// String em = us.getEmail();
-
-		String F_ID = flightdetails.getFlightID();
-
-		String source1 = flightdetails.getSource1();
-		String destination1 = flightdetails.getDestination1();
+		String tripType = "oneWay";
+		String source = flightdetails.getSource1();
+		String destination = flightdetails.getDestination1();
 		String price = flightdetails.getPrice();
 		String dateofdep1 = flightdetails.getDateOfDeparture1();
 		String dateofArr1 = flightdetails.getDateOfArrival1();
 		String depTime1 = flightdetails.getDepartureTime1();
-		String arrTime1 = flightdetails.getArrivalTime2();
+		String arrTime1 = flightdetails.getArrivalTime1();
 
+		
 		if (flightdetails.isRoundtrip()) {
+			tripType = "roundTrip";
+			String dateofReturn= flightdetails.getDateOfDeparture2();
+			String dateofArr2 = flightdetails.getDateOfArrival2();
+			String returnTime = flightdetails.getDepartureTime2();
+			String arrTime2 = flightdetails.getArrivalTime2();
+			
+			String RoundTripQuery = "insert into flightbookings (booking_ID, user_ID, tripType, destination, "
+					+ "source, totalCost, dateOfDeparture, dateOfArrival1, timeOfDeparture, timeOfArrival1, "
+					+ "dateOfReturn, dateOfArrival2, timeOfReturn, timeOfArrival2, dateOfBooking) "
+					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			
+			try {
+				// connect to DB
+				currentConnection = ConnectionUtil.getConnection(connectionData);
 
-			// query for roundtrip insert...
+				// create the mysql insert preparedstatement
+				preparedStmt = currentConnection.prepareStatement(RoundTripQuery);
+				preparedStmt.setString(1, b1);
+				preparedStmt.setString(2, userName);
+				preparedStmt.setString(3, tripType);
+				preparedStmt.setString(4, destination);
+				preparedStmt.setString(5, source);
+				preparedStmt.setString(6, price);
+				preparedStmt.setString(7, dateofdep1);
+				preparedStmt.setString(8, dateofArr1);
+				preparedStmt.setString(9, depTime1);
+				preparedStmt.setString(10, arrTime1);
+				preparedStmt.setString(11, dateofReturn);
+				preparedStmt.setString(12, dateofArr2);
+				preparedStmt.setString(13, returnTime);
+				preparedStmt.setString(14, arrTime2);
+				preparedStmt.setString(15, today);
 
+				// execute the preparedstatement
+				status = preparedStmt.executeUpdate();
+				System.out.println(status);
+				currentConnection.close();
+				return status;
+			} catch (Exception ex) {
+				System.out.println("Log In failed: An Exception has occurred! " + ex);
+			}
+			return status;
 		}
 
-		// CHANGE THE QUERY TO FLIGHT BOOKING....
-
-		String Query = "insert into flightbookings (hotelBooking_ID, user_ID, hotelName, numberOfRooms, numberOfNights,"
-				+ "typeOfRooms, hotelTotalCost, dateOfBooking) values (?, ?, ?, ?, ?, ?, ?, ?)";
-
+		String OneWayQuery = "insert into flightbookings (booking_ID, user_ID, tripType, destination, "
+				+ "source, totalCost, dateOfDeparture, dateOfArrival1, timeOfDeparture, timeOfArrival1, "
+				+ "dateOfBooking) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		
 		try {
 			// connect to DB
 			currentConnection = ConnectionUtil.getConnection(connectionData);
 
 			// create the mysql insert preparedstatement
-			preparedStmt = currentConnection.prepareStatement(Query);
-			/*
-			 * preparedStmt.setString(1, b1); preparedStmt.setString(2, em);
-			 * preparedStmt.setString(3, hn);
-			 * 
-			 * // execute the preparedstatement status =
-			 * preparedStmt.executeUpdate();
-			 */
+			preparedStmt = currentConnection.prepareStatement(OneWayQuery);
+			preparedStmt.setString(1, b1);
+			preparedStmt.setString(2, userName);
+			preparedStmt.setString(3, tripType);
+			preparedStmt.setString(4, destination);
+			preparedStmt.setString(5, source);
+			preparedStmt.setString(6, price);
+			preparedStmt.setString(7, dateofdep1);
+			preparedStmt.setString(8, dateofArr1);
+			preparedStmt.setString(9, depTime1);
+			preparedStmt.setString(10, arrTime1);
+			preparedStmt.setString(11, today);
+
+			// execute the preparedstatement
+			status = preparedStmt.executeUpdate();
+			System.out.println(status);
 			currentConnection.close();
-			return 1;
+			return status;
 		} catch (Exception ex) {
 			System.out.println("Log In failed: An Exception has occurred! " + ex);
 		}
-		// return false;
-		// return status;
-		return 0;
+		return status;
 	}
 
+	
 	public ArrayList<taBean> searchRegions(String location) {
 		ArrayList<taBean> taList = new ArrayList<taBean>();
 		Statement stmt = null;
@@ -339,6 +394,7 @@ public class ServicesDao {
 		return taList;
 	}
 
+	
 	public ArrayList<taBean> searchAttractions(String location) {
 		ArrayList<taBean> taList = new ArrayList<taBean>();
 		Statement stmt = null;
@@ -368,6 +424,7 @@ public class ServicesDao {
 		return taList;
 	}
 
+	
 	public boolean checkCountry(String country) {
 
 		boolean exist = false;
@@ -399,6 +456,7 @@ public class ServicesDao {
 		return exist;
 	}
 
+	
 	public boolean checkRegion(String region) {
 
 		boolean exist = false;
@@ -429,6 +487,7 @@ public class ServicesDao {
 		return exist;
 	}
 
+	
 	public hotelBean searchHotelDetails(String name, String regionID) {
 
 		hotelBean hotel = new hotelBean();
@@ -464,6 +523,7 @@ public class ServicesDao {
 		return hotel;
 	}
 
+	
 	public double calculateCost(HotelCostBean cost, String regionID) {
 		@SuppressWarnings("unused")
 		HotelCostBean hotel = new HotelCostBean();
@@ -492,6 +552,7 @@ public class ServicesDao {
 		return 0;
 	}
 
+	
 	public int bookHotel(userbean user, HotelCostBean cost) {
 
 		int status = 2;
@@ -534,8 +595,9 @@ public class ServicesDao {
 
 			// execute the preparedstatement
 			status = preparedStmt.executeUpdate();
+			System.out.println(status);
 			currentConnection.close();
-			return 1;
+			return status;
 		} catch (Exception ex) {
 			System.out.println("Log In failed: An Exception has occurred! " + ex);
 		}
@@ -543,6 +605,7 @@ public class ServicesDao {
 		return status;
 	}
 
+	
 	public int LoyalityPoints(String username) {
 		Connection currentConnection = null;
 		Statement stmt = null;

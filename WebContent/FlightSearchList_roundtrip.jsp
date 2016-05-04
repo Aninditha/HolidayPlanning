@@ -24,7 +24,6 @@
 <link rel="stylesheet" type="text/css"
 	href="css/bootstrap-theme.min.css">
 
-
 <script>
 	$("#myTable").tablesorter();
 
@@ -114,22 +113,23 @@ th {
 						<th>DateOfArrival</th>
 						<th>arrivalTime</th>
 						<th>Price</th>
-					
+
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${requestScope.flightList}" var="fmap">
 						<tr>
 							<td><c:out value="${fmap.key}" /></td>
-								
-							<c:forEach var="item" items="${requestScope.FlightArrayList}" begin="0" end="0">
-							
-							<td><c:out value="${item.dateOfDeparture1}" /></td>
-							<td><c:out value="${item.departureTime1}" /></td>
-							<td><c:out value="${item.dateOfArrival1}" /></td> 
-							<td><c:out value="${item.arrivalTime1}" /></td>
-							<td><c:out value="${item.price}" /></td>
-							
+
+							<c:forEach var="item" items="${requestScope.FlightArrayList}"
+								begin="0" end="0">
+
+								<td><c:out value="${item.dateOfDeparture1}" /></td>
+								<td><c:out value="${item.departureTime1}" /></td>
+								<td><c:out value="${item.dateOfArrival1}" /></td>
+								<td><c:out value="${item.arrivalTime1}" /></td>
+								<td><c:out value="${item.price}" /></td>
+
 							</c:forEach>
 						</tr>
 					</c:forEach>
@@ -166,29 +166,26 @@ th {
 					</tr>
 				</thead>
 				<tbody>
-			<c:forEach items="${requestScope.flightList}" var="fmap">
+					<c:forEach items="${requestScope.flightList}" var="fmap">
 						<tr>
 							<td><c:out value="${fmap.key}" /></td>
-								
-							<c:forEach var="item" items="${requestScope.FlightArrayList}" begin="0" end="0">
-							
-							<td><c:out value="${item.dateOfDeparture1}" /></td>
-							<td><c:out value="${item.departureTime1}" /></td>
-							<td><c:out value="${item.dateOfArrival1}" /></td> 
-							<td><c:out value="${item.arrivalTime1}" /></td>
-							<td><c:out value="${item.price}" /></td>
-							
+
+							<c:forEach var="item" items="${requestScope.FlightArrayList}"
+								begin="0" end="0">
+
+								<td><c:out value="${item.dateOfDeparture1}" /></td>
+								<td><c:out value="${item.departureTime1}" /></td>
+								<td><c:out value="${item.dateOfArrival1}" /></td>
+								<td><c:out value="${item.arrivalTime1}" /></td>
+								<td><c:out value="${item.price}" /></td>
+
 							</c:forEach>
-							<td><input type="radio" name="radioButton" value="${fmap.key}"> </td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-
-
 		</form>
 	</div>
-<%@include file="footer.jsp"%>
-
+	<%@include file="footer.jsp"%>
 </body>
 </html>

@@ -85,10 +85,7 @@ th {
 <body>
 	<%@include file="user_header.jsp"%>
 	<div class="container">
-
 		<form name="temp" action="FlightSearch" method="POST">
-
-
 			<h2 style="text-align: center">List of Flights</h2>
 			<br>
 
@@ -109,8 +106,6 @@ th {
 				<thead>
 					<tr>
 						<th class="header">FlightID</th>
-						<!-- 					<th>source</th>
-					<th>destination</th> -->
 						<th>DateOfDeparture</th>
 						<th>departureTime</th>
 						<th>DateOfArrival</th>
@@ -119,11 +114,10 @@ th {
 						<th>Select</th>
 					</tr>
 				</thead>
-				
+
 				<tbody>
-				
-					<c:forEach var="item" items="${requestScope.FlightArrayList}"
-						>
+
+					<c:forEach var="item" items="${requestScope.FlightArrayList}">
 						<tr>
 							<td rowspan="2"><c:out value="${item.flightID}" /></td>
 							<td><c:out value="${item.dateOfDeparture1}" /></td>
@@ -141,73 +135,17 @@ th {
 							<td><c:out value="${item.departureTime2}" /></td>
 							<td><c:out value="${item.dateOfArrival2}" /></td>
 							<td><c:out value="${item.arrivalTime2}" /></td>
-						
+
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-
-			<button type="submit" class="btn btn-default" name="">Book</button>
-				
-
-			<%-- <!-- For Roundtrip	 -->
-
 			<br>
-
-			<div class="container" style="text-align: center">
-				<span class="label label-success" style="font-size: 30px;">${requestScope.destination}</span>
-				<img src="images/flight.png" width="40" height="30"> <img
-					src="images/flight.png" width="40" height="30"> <img
-					src="images/flight.png" width="40" height="30"> <img
-					src="images/flight.png" width="40" height="30"> <span
-					class="label label-success" style="font-size: 30px">${requestScope.source}</span>
-			</div>
-
-			<br> <br>
-
-			<table class="tablesorter table table-bordered table-striped"
-				class="sortable" id="myTable1">
-
-				<thead>
-					<tr>
-						<th class="header">FlightID</th>
-						<th>DateOfDeparture</th>
-						<th>departureTime</th>
-						<th>DateOfArrival</th>
-						<th>arrivalTime</th>
-						<th>Price</th>
-						<th>Select</th>
-					</tr>
-				</thead>
-				<tbody>
-				<c:forEach items="${requestScope.flightList}" var="fmap">
-						<tr>
-							<td><c:out value="${fmap.key}" /></td>
-								
-							<c:forEach var="item" items="${requestScope.FlightArrayList}" begin="0" end="0">
-							
-							<td><c:out value="${item.dateOfDeparture2}" /></td>
-							<td><c:out value="${item.departureTime2}" /></td>
-							<td><c:out value="${item.dateOfArrival2}" /></td> 
-							<td><c:out value="${item.arrivalTime2}" /></td>
-							<td><c:out value="${item.price}" /></td>
-							
-							</c:forEach>
-							<td><input type="radio" name="radioButton1" value="${fmap.key}"> </td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-
-
-
-
-			<button type="submit" class="btn btn-default" name="${item}"
-				formaction="confirmFlight.jsp">Book</button> --%>
-
+			<center>
+				<button type="submit" class="btn btn-default" name="">Book</button>
+			</center>
 		</form>
 	</div>
-
-
+	<%@include file="footer.jsp"%>
 </body>
 </html>

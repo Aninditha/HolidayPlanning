@@ -29,7 +29,7 @@ public class FlightSearch extends HttpServlet {
 
 	Map<String, flightBean> flightMap = new HashMap<String, flightBean>();;
 	private ServicesDao serviceDao;
-	List<flightBean> FlightArrayList = new ArrayList<flightBean>() ;
+	List<flightBean> FlightArrayList = new ArrayList<flightBean>();
 
 	private static final long serialVersionUID = 1L;
 
@@ -65,35 +65,27 @@ public class FlightSearch extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String flightID = request.getParameter("radioButton");
-		
-		
-		//FlightBooking... calling BookFlight in services DAO.
-		if(flightID != null)
-		{
-			
-			
+
+		// FlightBooking... calling BookFlight in services DAO.
+		if (flightID != null) {
 			for (Entry<String, flightBean> entry : flightMap.entrySet()) {
 				String key = entry.getKey();
-				
-				
-				if(key.equals(flightID))
-				{
-					
-		
-					System.out.println("Inside flight search later1111");
-					
-					int bookflightstring = ServicesDao.BookFlight(entry.getValue());
-					
-					System.out.println("Inside flight search later2");
-	
-					
+				if (key.equals(flightID)) {
+					String username = request.getSession().getAttribute("username").toString();
+					int bookFlightStatus = ServicesDao.BookFlight(username, entry.getValue());
+					if (request.getSession().getAttribute("username") != null)
+						if(bookFlightStatus == 1){
+							RequestDispatcher rd = request.getRequestDispatcher("/FlightBookSuccess.jsp");
+							rd.forward(request, response);
+						} else if(bookFlightStatus == 2){
+							RequestDispatcher rd = request.getRequestDispatcher("/FlightBookFail.jsp");
+							rd.forward(request, response);
+						}
 				}
-				
 			}
 		}
-		
 
 		boolean roundtrip;
 
@@ -109,21 +101,10 @@ public class FlightSearch extends HttpServlet {
 			roundtrip = true;
 
 		try {
-
 			int capacity = Integer.parseInt(request.getParameter("capacity"));
-		
 			flightMap = serviceDao.searchFlights(source, destination, startDate, endDate, capacity, roundtrip);
-
-			for (Entry<String, flightBean> entry : flightMap.entrySet()) {
-				String key = entry.getKey();
-		
+			for (Entry<String, flightBean> entry : flightMap.entrySet())
 				FlightArrayList.add(entry.getValue());
-				
-				/*System.out.println(FlightArrayList.toString());*/
-			}
-
-	
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -149,8 +130,6 @@ public class FlightSearch extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/FlightSearchList_roundtrip.jsp");
 				rd.forward(request, response);
 			}
-
 		}
 	}
-	
 }

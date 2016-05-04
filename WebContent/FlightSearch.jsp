@@ -101,14 +101,15 @@ body {
 					<label class="control-label col-sm-3">Start Date</label>
 					<div class="col-sm-6">
 						<div class="input-group input-append date" id="dateRangePicker">
-						<c:if test="${sessionScope.TripDate == null}">
-    					<input required type="text" class="form-control" name="startDate" value="{sessionScope.TripDate}"/>
-						</c:if>
-						<c:if test="${!sessionScope.TripDate == null}">
-    					<input required type="text" class="form-control" name="startDate" value="{sessionScope.TripDate}"/>
-						</c:if>
-						
-							
+							<c:if test="${sessionScope.TripDate == null}">
+								<input required type="text" class="form-control" placeholder = "enter date"
+									name="startDate" value="{sessionScope.TripDate}" />
+							</c:if>
+							<c:if test="${!sessionScope.TripDate == null}">
+								<input required type="text" class="form-control"
+									name="startDate" value="{sessionScope.TripDate}" />
+							</c:if>
+
 							<span class="input-group-addon add-on"><span
 								class="glyphicon glyphicon-calendar"></span></span>
 						</div>
