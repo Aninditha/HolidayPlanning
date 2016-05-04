@@ -1,5 +1,6 @@
 package com.ssdi.POJO;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,64 @@ public class hotelBean {
 	private int numberOfVacancies;
 	private String regionID;
 	private Map<String, Double> roomPrice = new HashMap<String, Double>();
+	
+	
+	private String hotelBooking_ID;
+	private int numberOfRooms;
+	private int numberOfNights;
+	private String typeOfRooms;
+	private int hotelTotalCost;
+	private Date dateOfBooking;
+	
+	
+	public String getHotelBooking_ID() {
+		return hotelBooking_ID;
+	}
+
+	public void setHotelBooking_ID(String hotelBooking_ID) {
+		this.hotelBooking_ID = hotelBooking_ID;
+	}
+
+	public int getNumberOfRooms() {
+		return numberOfRooms;
+	}
+
+	public void setNumberOfRooms(int numberOfRooms) {
+		this.numberOfRooms = numberOfRooms;
+	}
+
+	public int getNumberOfNights() {
+		return numberOfNights;
+	}
+
+	public void setNumberOfNights(int numberOfNights) {
+		this.numberOfNights = numberOfNights;
+	}
+
+	public String getTypeOfRooms() {
+		return typeOfRooms;
+	}
+
+	public void setTypeOfRooms(String typeOfRooms) {
+		this.typeOfRooms = typeOfRooms;
+	}
+
+	public int getHotelTotalCost() {
+		return hotelTotalCost;
+	}
+
+	public void setHotelTotalCost(int hotelTotalCost) {
+		this.hotelTotalCost = hotelTotalCost;
+	}
+
+	public Date getDateOfBooking() {
+		return dateOfBooking;
+	}
+
+	public void setDateOfBooking(Date dateOfBooking) {
+		this.dateOfBooking = dateOfBooking;
+	}
+
 
 	public String getRegion() {
 		return region;

@@ -63,7 +63,6 @@ public class ServicesDao {
 		return bean;
 	}
 
-
 	public static boolean checkEmail(String email) {
 
 		boolean exist = false;
@@ -93,7 +92,6 @@ public class ServicesDao {
 		}
 		return exist;
 	}
-
 
 	public boolean logIn(String username, String password) {
 
@@ -125,7 +123,6 @@ public class ServicesDao {
 		}
 		return userExist;
 	}
-
 
 	public ArrayList<hotelBean> searchHotels(hotelBean bean) throws SQLException {
 
@@ -172,7 +169,6 @@ public class ServicesDao {
 		return hotel;
 	}
 
-
 	public boolean checkHotelRegion(String region) {
 		boolean exist = false;
 
@@ -202,7 +198,6 @@ public class ServicesDao {
 		}
 		return exist;
 	}
-
 
 	public Map<String, flightBean> searchFlights(String source, String destination, String startDate, String endDate,
 			int capacity, boolean roundtrip) {
@@ -269,10 +264,10 @@ public class ServicesDao {
 		Random rand = new Random();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		bookingID = rand.nextInt();
+		bookingID = rand.nextInt(Integer.MAX_VALUE)+1;
 		String today = dateFormat.format(date);
 		String b1 = "" + bookingID;
-		
+
 		PreparedStatement preparedStmt = null;
 		Connection currentConnection = null;
 
@@ -285,19 +280,18 @@ public class ServicesDao {
 		String depTime1 = flightdetails.getDepartureTime1();
 		String arrTime1 = flightdetails.getArrivalTime1();
 
-		
 		if (flightdetails.isRoundtrip()) {
 			tripType = "roundTrip";
-			String dateofReturn= flightdetails.getDateOfDeparture2();
+			String dateofReturn = flightdetails.getDateOfDeparture2();
 			String dateofArr2 = flightdetails.getDateOfArrival2();
 			String returnTime = flightdetails.getDepartureTime2();
 			String arrTime2 = flightdetails.getArrivalTime2();
-			
+
 			String RoundTripQuery = "insert into flightbookings (booking_ID, user_ID, tripType, destination, "
 					+ "source, totalCost, dateOfDeparture, dateOfArrival1, timeOfDeparture, timeOfArrival1, "
 					+ "dateOfReturn, dateOfArrival2, timeOfReturn, timeOfArrival2, dateOfBooking) "
 					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			
+
 			try {
 				// connect to DB
 				currentConnection = ConnectionUtil.getConnection(connectionData);
@@ -334,7 +328,7 @@ public class ServicesDao {
 		String OneWayQuery = "insert into flightbookings (booking_ID, user_ID, tripType, destination, "
 				+ "source, totalCost, dateOfDeparture, dateOfArrival1, timeOfDeparture, timeOfArrival1, "
 				+ "dateOfBooking) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		
+
 		try {
 			// connect to DB
 			currentConnection = ConnectionUtil.getConnection(connectionData);
@@ -364,7 +358,6 @@ public class ServicesDao {
 		return status;
 	}
 
-	
 	public ArrayList<taBean> searchRegions(String location) {
 		ArrayList<taBean> taList = new ArrayList<taBean>();
 		Statement stmt = null;
@@ -394,7 +387,6 @@ public class ServicesDao {
 		return taList;
 	}
 
-	
 	public ArrayList<taBean> searchAttractions(String location) {
 		ArrayList<taBean> taList = new ArrayList<taBean>();
 		Statement stmt = null;
@@ -424,7 +416,6 @@ public class ServicesDao {
 		return taList;
 	}
 
-	
 	public boolean checkCountry(String country) {
 
 		boolean exist = false;
@@ -456,7 +447,6 @@ public class ServicesDao {
 		return exist;
 	}
 
-	
 	public boolean checkRegion(String region) {
 
 		boolean exist = false;
@@ -487,7 +477,6 @@ public class ServicesDao {
 		return exist;
 	}
 
-	
 	public hotelBean searchHotelDetails(String name, String regionID) {
 
 		hotelBean hotel = new hotelBean();
@@ -523,7 +512,6 @@ public class ServicesDao {
 		return hotel;
 	}
 
-	
 	public double calculateCost(HotelCostBean cost, String regionID) {
 		@SuppressWarnings("unused")
 		HotelCostBean hotel = new HotelCostBean();
@@ -552,7 +540,6 @@ public class ServicesDao {
 		return 0;
 	}
 
-	
 	public int bookHotel(userbean user, HotelCostBean cost) {
 
 		int status = 2;
@@ -560,7 +547,7 @@ public class ServicesDao {
 		Random rand = new Random();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		bookingID = rand.nextInt();
+		bookingID = rand.nextInt(Integer.MAX_VALUE)+1;
 		String today = dateFormat.format(date);
 		String b1 = "" + bookingID;
 
@@ -605,7 +592,6 @@ public class ServicesDao {
 		return status;
 	}
 
-	
 	public int LoyalityPoints(String username) {
 		Connection currentConnection = null;
 		Statement stmt = null;
@@ -630,4 +616,53 @@ public class ServicesDao {
 		}
 		return points;
 	}
+	
+	
+	 public ArrayList<hotelBean> ViewUserBooking(String username) {
+			
+		 
+		 	ArrayList<hotelBean> hotelBookingList = new ArrayList<hotelBean>(); 
+		 	Connection currentConnection = null;
+			Statement stmt = null;
+			ResultSet rs = null;
+			
+			
+			hotelBean hotel;
+
+			String Query = "select * from hotelBookings where user_ID = \"" + username + "\";";
+
+			try {
+				// connect to DB
+				currentConnection = ConnectionUtil.getConnection(connectionData);
+
+				stmt = currentConnection.createStatement();
+
+				rs = stmt.executeQuery(Query);
+				while (rs.next()) {
+					
+				hotel = new hotelBean();
+				
+				String hotelBooking_ID = rs.getString("hotelBooking_ID");
+				String hotelName = rs.getString("hotelName");
+				int	numberOfRooms = rs.getInt("numberOfRooms");
+				int	numberOfNights = rs.getInt("numberOfNights");
+				String typeOfRoom = rs.getString("typeOfRooms");
+				int	hotelTotalCost = rs.getInt("hotelTotalCost");
+				Date dateOfBooking = rs.getDate("dateOfBooking");
+
+				hotel.setHotelName(hotelName);
+				hotel.setHotelBooking_ID(hotelBooking_ID);
+				hotel.setDateOfBooking(dateOfBooking);
+				hotel.setNumberOfRooms(numberOfRooms);
+				hotel.setNumberOfNights(numberOfNights);
+				hotel.setHotelTotalCost(hotelTotalCost);
+				hotel.setDateOfBooking(dateOfBooking);
+				
+				hotelBookingList.add(hotel);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return hotelBookingList;	
+		}
 }

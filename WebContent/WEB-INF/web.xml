@@ -94,5 +94,13 @@
   <servlet-mapping>
     <servlet-name>LoyalityPoints</servlet-name>
     <url-pattern>/LoyalityPoints</url-pattern>
-  </servlet-mapping>  
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>ViewBookings</servlet-name>
+    <servlet-class>com.ssdi.controller.ViewBookings</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewBookings</servlet-name>
+    <url-pattern>/ViewBookings</url-pattern>
+  </servlet-mapping> 
 </web-app>
