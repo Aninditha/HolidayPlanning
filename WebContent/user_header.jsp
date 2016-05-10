@@ -46,15 +46,15 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User perks <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   
-                  <li><a href="viewbooking.jsp">View Bookings</a></li>
-                  <li><a href="loyalty.jsp" onclick = "/LoyalityPoints">View loyalty points</a></li>
+                  <li><a href="ViewBookings">View Bookings</a></li>
+                  <li><a href="LoyalityPoints">View loyalty points</a></li>
                        </ul>
               </li>
 							<li><a href="contact_user.jsp">Contact us</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li><a>Welcome, ${sessionScope.username}</a></li>
-							<li><a href="" onclick = "/LogOut"> Log Out</a></li>
+							<li><a href="home.jsp" onclick = "/LogOut"> Log Out</a></li>
 							<li><a href="#"> </a></li>
 						</ul>
 					</div>

@@ -663,28 +663,85 @@ public class ServicesDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("List size: "+hotelBookingList.size());
 		return hotelBookingList;
 	}
+	
+	//flight view booking
+	
+	public ArrayList<flightBean> ViewUserBooking1(String username) {
 
+		ArrayList<flightBean> flightBookingList = new ArrayList<flightBean>();
+		Connection currentConnection = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		flightBean flight;
+
+		String Query = "select * from flightBookings where user_ID = \"" + username + "\";";
+
+		try {
+			// connect to DB
+			currentConnection = ConnectionUtil.getConnection(connectionData);
+			stmt = currentConnection.createStatement();
+
+			System.out.println("insdide view == " +Query);
+			
+			rs = stmt.executeQuery(Query);
+			while (rs.next()){
+
+				flight = new flightBean();
+				
+				String flightBooking_ID = rs.getString("booking_ID");
+				String tripType = rs.getString("tripType");
+				String destination = rs.getString("destination");
+				String source = rs.getString("source");
+				String cost = rs.getString("totalCost");
+				String dateOfDeparture = rs.getString("dateOfDeparture");
+				String dateOfArrival1 = rs.getString("dateOfArrival1");
+				String timeOfDeparture = rs.getString("timeOfDeparture");
+				String timeOfArrival1 = rs.getString("timeOfArrival1");
+//				String dateOfReturn = rs.getString("dateOfReturn");
+//				String dateOfArrival2 = rs.getString("dateOfArrival2");
+//				String timeOfReturn = rs.getString("timeOfReturn");
+//				String timeOfArrival2 = rs.getString("timeOfArrival2");
+				String dateOfBooking = rs.getString("dateOfBooking");
+
+				if(tripType.equals("oneWay")){
+					flight.setFlightID(flightBooking_ID);
+					flight.setSource1(source);
+					flight.setDestination1(destination);
+					flight.setPrice(cost);
+					flight.setDateOfDeparture1(dateOfDeparture);
+					flight.setDateOfArrival1(dateOfArrival1);;
+					flight.setDepartureTime1(timeOfDeparture);
+					flight.setArrivalTime1(timeOfArrival1);
+					flight.setDateOfBooking(dateOfBooking);
+					
+					flightBookingList.add(flight);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return flightBookingList;
+	}
+	
 	public int addHotel(hotelBean hotel) {
 
 		Connection currentConnection = null;
 		currentConnection = ConnectionUtil.getConnection(connectionData);
 
 		try {
-
 			PreparedStatement stmt = null;
-
 			String query = "insert into hotel values(?,?,?,?,?)";
 
 			stmt = currentConnection.prepareStatement(query);
-
 			stmt.setString(1, hotel.getRegionID());
 			stmt.setString(2, hotel.getHotelBooking_ID());
 			stmt.setString(3, hotel.getHotelName());
 			stmt.setString(4, hotel.getDescription());
 			stmt.setDouble(5, hotel.getRating());
-
 			stmt.executeUpdate();
 
 			currentConnection.close();
@@ -694,9 +751,7 @@ public class ServicesDao {
 			// TODO: handle exception
 			System.out.println("exception in add hotel method");
 			e.printStackTrace();
-
 		}
-
 		return 0;
 	}
 
@@ -706,25 +761,18 @@ public class ServicesDao {
 		currentConnection = ConnectionUtil.getConnection(connectionData);
 
 		try {
-
 			PreparedStatement stmt = null;
 
 			String query = null;
 			query = "delete from hotel where hotel_ID=?;";
 			System.out.println("deleting hotel");
-
 			stmt = currentConnection.prepareStatement(query);
-
 			stmt.setString(1, hotel.getHotelBooking_ID());
-
 			stmt.executeUpdate();
 			return 1;
 		} catch (Exception e) {
-
 			System.out.println("exception in delete hotel method");
-
 		}
-
 		return 0;
 	}
 
@@ -733,19 +781,10 @@ public class ServicesDao {
 		currentConnection = ConnectionUtil.getConnection(connectionData);
 
 		try {
-			Connection connection = null;
 			PreparedStatement stmt = null;
 
-			String query = null;
-			query = "insert into hoteldetails values(?,?,?,?)";
-			System.out.println("456");
-			stmt = connection.prepareStatement(query);
-			/*
-			 * System.out.println(hotel.getHotelID());
-			 * System.out.println(hotel.getDetailID());
-			 * System.out.println(hotel.getPrice());
-			 * System.out.println(hotel.getTypeOfRoom());
-			 */
+			String query = "insert into hoteldetails values(?,?,?,?)";
+			stmt = currentConnection.prepareStatement(query);
 
 			stmt.setString(1, hotel.getHotelBooking_ID());
 			stmt.setString(2, hotel.getHotelDetailId());
@@ -755,9 +794,7 @@ public class ServicesDao {
 
 			return 1;
 		} catch (Exception e) {
-
 			System.out.println("exception in add hotel method");
-
 		}
 		return 0;
 	}
@@ -768,23 +805,17 @@ public class ServicesDao {
 		currentConnection = ConnectionUtil.getConnection(connectionData);
 
 		try {
-			System.out.println("inside isValidAdmin function");
-			Connection connection = null;
 			PreparedStatement stmt = null;
 
 			String query = null;
 			query = "select * from admin where Email=? and password=?";
-			// System.out.println("123");
-			stmt = connection.prepareStatement(query);
-			// System.out.println("456");
+			stmt = currentConnection.prepareStatement(query);
 			stmt.setString(1, adminBean.getEmail());
 			stmt.setString(2, adminBean.getPassword());
 
 			ResultSet rs = stmt.executeQuery();
-			// System.out.println("789");
 			if (rs.next())
 				return true;
-
 		} catch (SQLException ex) {
 			System.out.println("Exception in add admin method");
 		}

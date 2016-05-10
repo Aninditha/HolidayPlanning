@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ssdi.POJO.flightBean;
 import com.ssdi.POJO.hotelBean;
 import com.ssdi.POJO.userbean;
 import com.ssdi.model.ServicesDao;
@@ -26,8 +27,7 @@ public class ViewBookings extends HttpServlet {
 	private ServicesDao serviceDao;
 
 	ArrayList<hotelBean> hotelBookingList;
-
-	
+	ArrayList<flightBean> flightBookingList;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -51,6 +51,7 @@ public class ViewBookings extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getSession().getAttribute("username").toString();
 		hotelBookingList = serviceDao.ViewUserBooking(username);
+		//flightBookingList = serviceDao.ViewUserBooking2(username);
 		doPost(request, response);
 	}
 
@@ -58,10 +59,8 @@ public class ViewBookings extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if (request.getSession().getAttribute("username") != null) {
-		
-			
+		System.out.println("controller hotel booking list");
+		if (request.getSession().getAttribute("username") != null) {	
 		
 		//	System.out.println(points+""+request.getSession().getAttribute("username"));
 			request.setAttribute("hotelBookingList", hotelBookingList);

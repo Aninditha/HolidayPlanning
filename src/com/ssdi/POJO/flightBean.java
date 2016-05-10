@@ -17,6 +17,7 @@ public class flightBean {
 	private String arrivalTime2;
 	private String DateOfDeparture2;
 	private String DateOfArrival2;
+	private String dateOfBooking;
 	
 	private boolean roundtrip;
 	
@@ -163,5 +164,11 @@ public class flightBean {
 	}
 	public String getFlightID() {
 		return FlightID;
+	}
+	public String getDateOfBooking() {
+		return dateOfBooking;
+	}
+	public void setDateOfBooking(String dateOfBooking) {
+		this.dateOfBooking = dateOfBooking;
 	}
 }
