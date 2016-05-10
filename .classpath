@@ -18,5 +18,6 @@
 	<classpathentry kind="lib" path="C:/Users/madis/Downloads/Setups/junit-4.8.2.jar/junit-4.8.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/madis/OneDrive/Documents/SSDI/org.json.jar"/>
 	<classpathentry kind="lib" path="C:/Eclipse/HolidayPlanning/WebContent/WEB-INF/lib/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/madis/Downloads/Setups/mockito-all-1.10.19.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

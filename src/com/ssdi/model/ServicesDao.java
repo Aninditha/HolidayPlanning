@@ -16,6 +16,7 @@ import java.util.Random;
 
 import com.ssdi.util.ConnectionUtil;
 import com.ssdi.POJO.HotelCostBean;
+import com.ssdi.POJO.adminBean;
 import com.ssdi.POJO.flightBean;
 import com.ssdi.POJO.hotelBean;
 import com.ssdi.POJO.taBean;
@@ -63,7 +64,7 @@ public class ServicesDao {
 		return bean;
 	}
 
-	public static boolean checkEmail(String email) {
+	public boolean checkEmail(String email) {
 
 		boolean exist = false;
 		Statement stmt = null;
@@ -264,7 +265,7 @@ public class ServicesDao {
 		Random rand = new Random();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		bookingID = rand.nextInt(Integer.MAX_VALUE)+1;
+		bookingID = rand.nextInt(Integer.MAX_VALUE) + 1;
 		String today = dateFormat.format(date);
 		String b1 = "" + bookingID;
 
@@ -547,7 +548,7 @@ public class ServicesDao {
 		Random rand = new Random();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		bookingID = rand.nextInt(Integer.MAX_VALUE)+1;
+		bookingID = rand.nextInt(Integer.MAX_VALUE) + 1;
 		String today = dateFormat.format(date);
 		String b1 = "" + bookingID;
 
@@ -616,38 +617,37 @@ public class ServicesDao {
 		}
 		return points;
 	}
-	
-	
-	 public ArrayList<hotelBean> ViewUserBooking(String username) {
+
+	public ArrayList<hotelBean> ViewUserBooking(String username) {
+
+		ArrayList<hotelBean> hotelBookingList = new ArrayList<hotelBean>();
+		Connection currentConnection = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		hotelBean hotel;
+
+		String Query = "select * from hotelBookings where user_ID = \"" + username + "\";";
+
+		try {
+			// connect to DB
+			currentConnection = ConnectionUtil.getConnection(connectionData);
+
+			stmt = currentConnection.createStatement();
+
+			System.out.println("insdide view == " +Query);
 			
-		 
-		 	ArrayList<hotelBean> hotelBookingList = new ArrayList<hotelBean>(); 
-		 	Connection currentConnection = null;
-			Statement stmt = null;
-			ResultSet rs = null;
-			
-			
-			hotelBean hotel;
+			rs = stmt.executeQuery(Query);
+			while (rs.next()) {
 
-			String Query = "select * from hotelBookings where user_ID = \"" + username + "\";";
-
-			try {
-				// connect to DB
-				currentConnection = ConnectionUtil.getConnection(connectionData);
-
-				stmt = currentConnection.createStatement();
-
-				rs = stmt.executeQuery(Query);
-				while (rs.next()) {
-					
 				hotel = new hotelBean();
-				
+
 				String hotelBooking_ID = rs.getString("hotelBooking_ID");
 				String hotelName = rs.getString("hotelName");
-				int	numberOfRooms = rs.getInt("numberOfRooms");
-				int	numberOfNights = rs.getInt("numberOfNights");
+				int numberOfRooms = rs.getInt("numberOfRooms");
+				int numberOfNights = rs.getInt("numberOfNights");
 				String typeOfRoom = rs.getString("typeOfRooms");
-				int	hotelTotalCost = rs.getInt("hotelTotalCost");
+				int hotelTotalCost = rs.getInt("hotelTotalCost");
 				Date dateOfBooking = rs.getDate("dateOfBooking");
 
 				hotel.setHotelName(hotelName);
@@ -657,12 +657,137 @@ public class ServicesDao {
 				hotel.setNumberOfNights(numberOfNights);
 				hotel.setHotelTotalCost(hotelTotalCost);
 				hotel.setDateOfBooking(dateOfBooking);
-				
+
 				hotelBookingList.add(hotel);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
-			return hotelBookingList;	
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return hotelBookingList;
+	}
+
+	public int addHotel(hotelBean hotel) {
+
+		Connection currentConnection = null;
+		currentConnection = ConnectionUtil.getConnection(connectionData);
+
+		try {
+
+			PreparedStatement stmt = null;
+
+			String query = "insert into hotel values(?,?,?,?,?)";
+
+			stmt = currentConnection.prepareStatement(query);
+
+			stmt.setString(1, hotel.getRegionID());
+			stmt.setString(2, hotel.getHotelBooking_ID());
+			stmt.setString(3, hotel.getHotelName());
+			stmt.setString(4, hotel.getDescription());
+			stmt.setDouble(5, hotel.getRating());
+
+			stmt.executeUpdate();
+
+			currentConnection.close();
+
+			return 1;
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("exception in add hotel method");
+			e.printStackTrace();
+
+		}
+
+		return 0;
+	}
+
+	public int deleteHotel(hotelBean hotel) {
+
+		Connection currentConnection = null;
+		currentConnection = ConnectionUtil.getConnection(connectionData);
+
+		try {
+
+			PreparedStatement stmt = null;
+
+			String query = null;
+			query = "delete from hotel where hotel_ID=?;";
+			System.out.println("deleting hotel");
+
+			stmt = currentConnection.prepareStatement(query);
+
+			stmt.setString(1, hotel.getHotelBooking_ID());
+
+			stmt.executeUpdate();
+			return 1;
+		} catch (Exception e) {
+
+			System.out.println("exception in delete hotel method");
+
+		}
+
+		return 0;
+	}
+
+	public int addHotelDetail(hotelBean hotel) {
+		Connection currentConnection = null;
+		currentConnection = ConnectionUtil.getConnection(connectionData);
+
+		try {
+			Connection connection = null;
+			PreparedStatement stmt = null;
+
+			String query = null;
+			query = "insert into hoteldetails values(?,?,?,?)";
+			System.out.println("456");
+			stmt = connection.prepareStatement(query);
+			/*
+			 * System.out.println(hotel.getHotelID());
+			 * System.out.println(hotel.getDetailID());
+			 * System.out.println(hotel.getPrice());
+			 * System.out.println(hotel.getTypeOfRoom());
+			 */
+
+			stmt.setString(1, hotel.getHotelBooking_ID());
+			stmt.setString(2, hotel.getHotelDetailId());
+			stmt.setDouble(3, hotel.getHoteldetailprice());
+			stmt.setString(4, hotel.getTypeOfRoom());
+			stmt.executeUpdate();
+
+			return 1;
+		} catch (Exception e) {
+
+			System.out.println("exception in add hotel method");
+
+		}
+		return 0;
+	}
+
+	public boolean isValidAdmin(adminBean adminBean) {
+
+		Connection currentConnection = null;
+		currentConnection = ConnectionUtil.getConnection(connectionData);
+
+		try {
+			System.out.println("inside isValidAdmin function");
+			Connection connection = null;
+			PreparedStatement stmt = null;
+
+			String query = null;
+			query = "select * from admin where Email=? and password=?";
+			// System.out.println("123");
+			stmt = connection.prepareStatement(query);
+			// System.out.println("456");
+			stmt.setString(1, adminBean.getEmail());
+			stmt.setString(2, adminBean.getPassword());
+
+			ResultSet rs = stmt.executeQuery();
+			// System.out.println("789");
+			if (rs.next())
+				return true;
+
+		} catch (SQLException ex) {
+			System.out.println("Exception in add admin method");
+		}
+		return false;
+	}
 }

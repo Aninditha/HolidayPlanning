@@ -9,7 +9,7 @@ public class hotelBean {
 	private String region;
 	private String hotelName;
 	private String description;
-	private float rating;
+	private double rating;
 	private int numberOfVacancies;
 	private String regionID;
 	private Map<String, Double> roomPrice = new HashMap<String, Double>();
@@ -22,6 +22,10 @@ public class hotelBean {
 	private int hotelTotalCost;
 	private Date dateOfBooking;
 	
+	
+	private double hoteldetailprice;
+	private String typeOfRoom;
+	private String HotelDetailId;
 	
 	public String getHotelBooking_ID() {
 		return hotelBooking_ID;
@@ -96,11 +100,11 @@ public class hotelBean {
 		this.description = description;
 	}
 
-	public float getRating() {
+	public double getRating() {
 		return rating;
 	}
 
-	public void setRating(float rating) {
+	public void setRating(double rating) {
 		this.rating = rating;
 	}
 
@@ -131,4 +135,29 @@ public class hotelBean {
 	public void setRoomPrice(Map<String, Double> roomPrice) {
 		this.roomPrice = roomPrice;
 	}
+
+	public double getHoteldetailprice() {
+		return hoteldetailprice;
+	}
+
+	public void setHoteldetailprice(double hoteldetailprice) {
+		this.hoteldetailprice = hoteldetailprice;
+	}
+
+	public String getTypeOfRoom() {
+		return typeOfRoom;
+	}
+
+	public void setTypeOfRoom(String typeOfRoom) {
+		this.typeOfRoom = typeOfRoom;
+	}
+
+	public String getHotelDetailId() {
+		return HotelDetailId;
+	}
+
+	public void setHotelDetailId(String hotelDetailId) {
+		HotelDetailId = hotelDetailId;
+	}
+
 }

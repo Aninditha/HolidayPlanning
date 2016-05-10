@@ -37,6 +37,10 @@ public class LogIn extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
+	public LogIn(ServicesDao serviceDao2, RequestDispatcher rd, HttpSession session, userbean user) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void init(ServletConfig config) throws ServletException {
 
 		super.init(config);
@@ -58,7 +62,7 @@ public class LogIn extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		userbean User = new userbean();
 		try{

@@ -12,21 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import com.ssdi.POJO.userbean;
+import com.ssdi.controller.LogIn;
 import com.ssdi.controller.Register;
 import com.ssdi.model.ServicesDao;
 
-import org.junit.Before;
-import org.junit.Test;
-
-public class testRegisterController extends Mockito {
+public class testLogIn extends Mockito{
 
 	/** Servlet under test. */
-	private Register servlet;
+	private LogIn servlet;
 
 	/** Mock request. */
 	private HttpServletRequest request;
@@ -46,7 +46,7 @@ public class testRegisterController extends Mockito {
 	/**
 	 * Launches Mockito configuration from annotations.
 	 */
-
+	
 	private userbean user;
 	private RequestDispatcher rd;
 	private ServicesDao serviceDao;
@@ -59,10 +59,10 @@ public class testRegisterController extends Mockito {
 		parameters = new HashMap();
 		serviceDao = mock(ServicesDao.class);
 		session = mock(HttpSession.class);
-		servlet = new Register(serviceDao, rd, session, user);
+		servlet = new LogIn(serviceDao, rd, session, user);
 		request = mock(HttpServletRequest.class);
 		response = mock(HttpServletResponse.class);
-
+		
 		when(request.getSession()).thenReturn(session);
 		when(request.getParameterMap()).thenReturn(parameters);
 		when(request.getRequestDispatcher(anyString())).thenAnswer(new Answer() {
@@ -159,7 +159,7 @@ public class testRegisterController extends Mockito {
 	 * @throws ServletException
 	 */
 	@Test
-	public void testValidRegister() throws ServletException, IOException {
+	public void testValidLogIn() throws ServletException, IOException {
 		Mockito.doAnswer(new Answer() {
 
 			/**

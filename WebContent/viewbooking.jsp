@@ -16,8 +16,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 <style>
 body {
-	background-image:
-		url('http://www.bizreport.com/images/shutterstock/2015/02/loyalty_151899761-thumb-380xauto-3465.jpg');
+	
 	background-color: #cccccc;
 	background-repeat: no-repeat;
 	background-size: cover;
