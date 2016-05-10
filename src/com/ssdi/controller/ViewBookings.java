@@ -51,7 +51,7 @@ public class ViewBookings extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getSession().getAttribute("username").toString();
 		hotelBookingList = serviceDao.ViewUserBooking(username);
-		//flightBookingList = serviceDao.ViewUserBooking2(username);
+		flightBookingList = serviceDao.ViewFlightBookings(username);
 		doPost(request, response);
 	}
 
@@ -59,11 +59,11 @@ public class ViewBookings extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("controller hotel booking list");
 		if (request.getSession().getAttribute("username") != null) {	
 		
 		//	System.out.println(points+""+request.getSession().getAttribute("username"));
 			request.setAttribute("hotelBookingList", hotelBookingList);
+			request.setAttribute("flightBookingList", flightBookingList);
 			RequestDispatcher rd = request.getRequestDispatcher("/viewbooking.jsp");
 			rd.forward(request, response);
 		}

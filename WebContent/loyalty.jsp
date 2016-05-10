@@ -49,14 +49,14 @@ body {
 							name="currentLoyalityPoints" value="${requestScope.currentLoyalityPoints}">
 					</div>
 				</div>
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label class="control-label col-md-4" for="usr">Total
 						Loyalty Points</label>
 					<div class="col-md-4">
 						<input type="text" readonly class="form-control" id="usr1"
 							name="First Name" placeholder="" required>
 					</div>
-				</div>
+				</div> -->
 			</form>
 		</div>
 	</section>

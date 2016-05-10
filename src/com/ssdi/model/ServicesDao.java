@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -657,6 +658,7 @@ public class ServicesDao {
 				hotel.setNumberOfNights(numberOfNights);
 				hotel.setHotelTotalCost(hotelTotalCost);
 				hotel.setDateOfBooking(dateOfBooking);
+				hotel.setTypeOfRoom(typeOfRoom);
 
 				hotelBookingList.add(hotel);
 			}
@@ -669,7 +671,7 @@ public class ServicesDao {
 	
 	//flight view booking
 	
-	public ArrayList<flightBean> ViewUserBooking1(String username) {
+	public ArrayList<flightBean> ViewFlightBookings(String username) {
 
 		ArrayList<flightBean> flightBookingList = new ArrayList<flightBean>();
 		Connection currentConnection = null;
@@ -684,8 +686,6 @@ public class ServicesDao {
 			// connect to DB
 			currentConnection = ConnectionUtil.getConnection(connectionData);
 			stmt = currentConnection.createStatement();
-
-			System.out.println("insdide view == " +Query);
 			
 			rs = stmt.executeQuery(Query);
 			while (rs.next()){
@@ -707,8 +707,9 @@ public class ServicesDao {
 //				String timeOfArrival2 = rs.getString("timeOfArrival2");
 				String dateOfBooking = rs.getString("dateOfBooking");
 
-				if(tripType.equals("oneWay")){
+	//			if(tripType.equals("oneWay")){
 					flight.setFlightID(flightBooking_ID);
+					flight.setTripType(tripType);
 					flight.setSource1(source);
 					flight.setDestination1(destination);
 					flight.setPrice(cost);
@@ -719,8 +720,14 @@ public class ServicesDao {
 					flight.setDateOfBooking(dateOfBooking);
 					
 					flightBookingList.add(flight);
-				}
+		//		}
 			}
+			System.out.println(flightBookingList.size());
+			 Iterator iter = flightBookingList.iterator();
+		      while (iter.hasNext()) {
+		    	  flightBean f1 = (flightBean) iter.next();
+		         System.out.println(f1.getSource1());
+		      }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

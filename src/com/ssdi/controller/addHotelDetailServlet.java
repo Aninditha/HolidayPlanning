@@ -83,7 +83,7 @@ public class addHotelDetailServlet extends HttpServlet {
 			}
 
 			if (flag == 1) {
-				String str = "Registration failed";
+				String str = "Hotel details added";
 				System.out.println(str);
 				request.setAttribute("msg", str);// has to be deleted after
 													// adding this message in
